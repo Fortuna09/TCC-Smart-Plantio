@@ -14,7 +14,9 @@ const connection = require("./database/database");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+    origin: process.env.NODE_ENV === 'production'
+        ? [process.env.CORS_ORIGIN]
+        : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
@@ -151,7 +153,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(express.json());
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 /*
 app.get("/publica",(req,res) =>{
