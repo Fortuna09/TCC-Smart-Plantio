@@ -203,9 +203,9 @@ app.post("/protegida", verificaTokens,async(req,res) =>{
 app.post("/login", verifyToken,async(req,res) =>{
     const user = req.user
     //Dados que necessito
-    const userName = req.user.name
+    const userName = req.user.name || req.user.given_name || req.user.email?.split('@')[0] || 'Usuário'
     const userEmail = req.user.email
-    const userPicture = req.user.picture
+    const userPicture = req.user.picture || ''
     try {
         const existingUser = await User.findOne({ where: { email: userEmail } });
 
