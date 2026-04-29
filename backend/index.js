@@ -201,11 +201,15 @@ app.post("/protegida", verificaTokens,async(req,res) =>{
 
 /*  Rota para --> VALIDAR USUÁRIO*/
 app.post("/login", verifyToken,async(req,res) =>{
-    const user = req.user
-    //Dados que necessito
-    const userName = req.user.name || req.user.given_name || req.user.email?.split('@')[0] || 'Usuário'
-    const userEmail = req.user.email
-    const userPicture = req.user.picture || ''
+    const user = req.user;
+    const userName = req.user.name || req.user.given_name || req.user.email?.split('@')[0] || 'Usuário';
+    const userEmail = req.user.email;
+    const userPicture = req.user.picture || null;
+
+    if (!userEmail) {
+        return res.status(400).json({ message: 'Token Google sem email' });
+    }
+
     try {
         const existingUser = await User.findOne({ where: { email: userEmail } });
 
@@ -233,8 +237,8 @@ app.post("/login", verifyToken,async(req,res) =>{
         }
 
     } catch (error) {
-        console.error('Erro ao processar a solicitação:', error);
-        return res.status(500).json({ message: "Erro ao processar a solicitação" });
+        console.error('Erro ao processar a solicitação /login:', error);
+        return res.status(500).json({ message: "Erro ao processar a solicitação", detail: error.message });
     }
     //node --watch index.js
 });

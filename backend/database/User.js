@@ -10,7 +10,7 @@ const User = connection.define('users',{
         allowNull: false
     },picture:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     }
 });
 
