@@ -5,7 +5,8 @@ const { QueryTypes } = require('sequelize');
 //Configurando autenticação Google
 const {OAuth2Client} = require('google-auth-library');
 require('dotenv').config();
-const client = new OAuth2Client();
+const audience = process.env.AUDIENCE || process.env.GOOGLE_CLIENT_ID;
+const client = new OAuth2Client(audience);
 //const nodemailer = require('nodemailer');
 const verifyToken = require('./middlewares/verifyToken');
 

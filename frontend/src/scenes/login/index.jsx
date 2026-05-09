@@ -3,7 +3,6 @@ import { Grid, Paper, Avatar, Typography, useTheme, useMediaQuery, Box,TextField
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios'; 
-axios.defaults.baseURL = 'http://localhost:3000'; // URL do seu backend
 import secureLocalStorage from 'react-secure-storage';
 import { tokens } from "../../theme";
 
