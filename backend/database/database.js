@@ -6,16 +6,21 @@ const dbOptions = {
     port: Number(process.env.DB_PORT) || 3306,
     dialect: 'mysql',
     timezone: "-03:00",
-    logging: false // Remove logs de SQL no console
+    logging: false, // Remove logs de SQL no console
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
 };
 
 // Enable SSL when requested by provider (Aiven/managed MySQL)
 if (process.env.DB_SSL === 'true') {
     dbOptions.dialectOptions = {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
+        ssl: 'Amazon RDS',
+        supportBigNumbers: true,
+        bigNumberStrings: true
     };
 }
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import secureLocalStorage from 'react-secure-storage';
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/MySidebar";
 import Dashboard from "./scenes/dashboard";
@@ -49,13 +50,23 @@ function App() {
   const [conect, setConect] = useState(false); 
   const navigate = useNavigate(); 
 
+  // Verificar se há token salvo ao carregar a página
+  useEffect(() => {
+    const token = secureLocalStorage.getItem('auth_token');
+    if (token) {
+      setConect(true);
+    }
+  }, []);
+
   const handleLogin = () => {
     setConect(true);
     navigate('/home'); 
   };
 
   const handleLogout = () => {
-    setConect(false); 
+    setConect(false);
+    secureLocalStorage.removeItem('auth_token');
+    secureLocalStorage.removeItem('userData');
   };
 
   return (
