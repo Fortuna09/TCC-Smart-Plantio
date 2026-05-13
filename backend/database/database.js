@@ -15,14 +15,14 @@ const dbOptions = {
     }
 };
 
-// Enable SSL when requested by provider (Aiven/managed MySQL)
-if (process.env.DB_SSL === 'true') {
-    dbOptions.dialectOptions = {
-        ssl: 'Amazon RDS',
-        supportBigNumbers: true,
-        bigNumberStrings: true
-    };
-}
+// Enable SSL with proper certificate handling
+dbOptions.dialectOptions = {
+    ssl: process.env.NODE_ENV === 'production' 
+        ? { rejectUnauthorized: false }  // Aceita certificados auto-assinados em produção
+        : true,
+    supportBigNumbers: true,
+    bigNumberStrings: true
+};
 
 const connection = new Sequelize(
     process.env.DB_NAME || 'smartplantio', 
