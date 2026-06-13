@@ -20,11 +20,6 @@ const StorageItem = require("../database/StorageItem");
 router.get('/custos-pie-chart', verifyToken, async (req, res) => {
     const { safraId } = req.query;
 
-    const safra = await Safra.findByPk(safraId);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     //Somando custos por categoria
     const query = `
       SELECT category, SUM(totalValue) AS value
@@ -35,6 +30,11 @@ router.get('/custos-pie-chart', verifyToken, async (req, res) => {
     `;
   
     try {
+        const safra = await Safra.findByPk(safraId);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const sumCustos = await connection.query(query, {
           replacements: { safraId },  
           type: QueryTypes.SELECT  
@@ -172,11 +172,6 @@ router.get('/all-custos-pie-chart', verifyToken, async (req, res) => {
 router.get('/custos-glebas-line-chart', verifyToken, async (req, res) => {
     const { safraId } = req.query;
 
-    const safra = await Safra.findByPk(safraId);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     //Somando custos por categoria
     const query = `
         SELECT 
@@ -198,6 +193,11 @@ router.get('/custos-glebas-line-chart', verifyToken, async (req, res) => {
     `;
   
     try {
+        const safra = await Safra.findByPk(safraId);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const sumCustos = await connection.query(query, {
           replacements: { safraId },  
           type: QueryTypes.SELECT  
@@ -239,11 +239,6 @@ router.get('/custos-glebas-line-chart', verifyToken, async (req, res) => {
 router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
     const { safraId, safraType } = req.query;
 
-    const safra = await Safra.findByPk(safraId);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     const query = `
         SELECT 
             sg.glebaId, 
@@ -265,6 +260,11 @@ router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
     `;
   
     try {
+        const safra = await Safra.findByPk(safraId);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const sumCustos = await connection.query(query, {
             replacements: { safraId, type: safraType },  
             type: QueryTypes.SELECT  
@@ -319,11 +319,6 @@ router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
 router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) => {
     const { safraId, safraType } = req.query;
 
-    const safra = await Safra.findByPk(safraId);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     //Somando custos por categoria
     const query = `
         SELECT 
@@ -345,6 +340,11 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
     `;
   
     try {
+        const safra = await Safra.findByPk(safraId);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const sumCustos = await connection.query(query, {
             replacements: { safraId, type: safraType },  
             type: QueryTypes.SELECT  

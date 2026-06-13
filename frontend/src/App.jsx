@@ -47,7 +47,7 @@ import Home from './scenes/home'
 
 function App() {
   const [theme, colorMode] = useMode();
-  const [conect, setConect] = useState(false); 
+  const [conect, setConect] = useState(() => !!secureLocalStorage.getItem('auth_token')); 
   const navigate = useNavigate(); 
 
   // Verificar se há token salvo ao carregar a página
@@ -119,6 +119,8 @@ function App() {
                   <Route path="/estoque/:id" element={<StoragePage />} />
                   <Route path="/estoque/add" element={<StorageForm />} />
                   <Route path="/estoque/edit/:id" element={<StorageEditPage />} />
+                  <Route path="/login" element={<Navigate to="/home" />} />
+                  <Route path="/" element={<Navigate to="/home" />} />
                 </Routes>
               </main>
             </>

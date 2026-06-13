@@ -49,7 +49,7 @@ const BarChart = ({isDashboard, safraId, safraType}) => {
       };
       fetchBarData();
     }
-  }, [userData]);  
+  }, [userData, safraId, safraType]);  
 
 
   return (

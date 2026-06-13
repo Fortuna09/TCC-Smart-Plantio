@@ -46,7 +46,7 @@ const Sidebar = ({ onLogout }) => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const isMobile = useMediaQuery("(max-width: 1000px)");
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState("Início");
   const navigate = useNavigate(); 
   const location = useLocation();
 

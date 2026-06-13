@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery, IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik } from "formik";
 import { tokens } from "../../theme";
@@ -170,6 +171,11 @@ const StorageForm = () => {
   
   return (
     <Box m="20px">
+      <Box display="flex" alignItems="center" mb="10px">
+        <IconButton onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+          <ArrowBackIcon />
+        </IconButton>
+      </Box>
       <Header title="Editar Item em Estoque" subtitle="Edite as informações do item em estoque" />
       <Formik
         onSubmit={handleFormSubmit}

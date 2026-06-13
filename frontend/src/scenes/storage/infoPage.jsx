@@ -3,6 +3,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 import axios from "axios";
 import { Box, Typography, useTheme, Button, useMediaQuery,Checkbox, FormControlLabel,Autocomplete,TextField, Modal, Backdrop, Fade, Chip,Tooltip,IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -252,6 +253,11 @@ const StoragePage = () => {
 
     return (
         <Box m="20px">
+            <Box display="flex" alignItems="center" mb="10px">
+                <IconButton onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+                    <ArrowBackIcon />
+                </IconButton>
+            </Box>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Header title="Estoque" subtitle="Informações do item em estoque" />
             </Box>

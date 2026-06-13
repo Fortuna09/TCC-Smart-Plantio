@@ -49,8 +49,7 @@ const BarChart = ({isDashboard, safraId}) => {
       };
       fetchBarData();
     }
-  }, [userData]);  
-
+  }, [userData, safraId]);  
 
   return (
     <ResponsiveBar

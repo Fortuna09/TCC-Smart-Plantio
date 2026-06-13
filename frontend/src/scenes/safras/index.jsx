@@ -8,6 +8,7 @@ import secureLocalStorage from 'react-secure-storage';
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -68,43 +69,21 @@ const Safras = () => {
             field: "actions",
             headerName: "Ações",
             flex: 1,
-            minWidth: 100,
+            minWidth: 130,
             renderCell: (params) => {
                 const { id } = params.row;
-
                 return (
-                    <Box 
-                        display="flex" 
-                        justifyContent="center" 
-                        width="100%"
-                        m="10px auto"
-                    >
-                        {isMobile ? (
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
-                                        <VisibilityIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </>
-                        ):(
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: colors.greenAccent[500],
-                                            "&:hover": {
-                                                backgroundColor: colors.grey[700], 
-                                            },
-                                        }}
-                                        onClick={() => handleView(id)}
-                                    >
-                                        <VisibilityIcon />
-                                    </Button>
-                                </Tooltip>
-                            </>
-                        )}
+                    <Box display="flex" justifyContent="center" gap="8px" width="100%" m="10px auto">
+                        <Tooltip title="Visualizar">
+                            <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
+                                <VisibilityIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Editar">
+                            <IconButton onClick={() => navigate(`/safras/edit/${id}`)} sx={{ color: colors.orangeAccent[500]}}>
+                                <EditIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 );
             },
@@ -197,43 +176,21 @@ const Safras = () => {
             field: "actions",
             headerName: "Ações",
             flex: 1,
-            minWidth: 100,
+            minWidth: 130,
             renderCell: (params) => {
                 const { id } = params.row;
-
                 return (
-                    <Box 
-                        display="flex" 
-                        justifyContent="center" 
-                        width="100%"
-                        m="10px auto"
-                    >
-                        {isMobile ? (
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
-                                        <VisibilityIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </>
-                        ):(
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: colors.greenAccent[500],
-                                            "&:hover": {
-                                                backgroundColor: colors.grey[700], 
-                                            },
-                                        }}
-                                        onClick={() => handleView(id)}
-                                    >
-                                        <VisibilityIcon />
-                                    </Button>
-                                </Tooltip>
-                            </>
-                        )}
+                    <Box display="flex" justifyContent="center" gap="8px" width="100%" m="10px auto">
+                        <Tooltip title="Visualizar">
+                            <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
+                                <VisibilityIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Editar">
+                            <IconButton onClick={() => navigate(`/safras/edit/${id}`)} sx={{ color: colors.orangeAccent[500]}}>
+                                <EditIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Box>
                 );
             },

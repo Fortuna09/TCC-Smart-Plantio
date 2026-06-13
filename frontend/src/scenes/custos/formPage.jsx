@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback  } from 'react';
 import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery,IconButton, CircularProgress } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik } from "formik";
@@ -209,6 +210,11 @@ const CustosForm = () => {
   
   return (
     <Box m="20px">
+      <Box display="flex" alignItems="center" mb="10px">
+      <IconButton onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+      <ArrowBackIcon />
+      </IconButton>
+      </Box>
       <Header title="Adicionar Custo" subtitle="Preencha os campos para que seja cadastrado um custo" />
       <Typography variant="body1" sx={{ mb: "20px", color: theme.palette.mode === 'dark' ? colors.primary[100] : colors.grey[600] }}>
         <IconButton sx={{ p: 0, mr: 1 }}>

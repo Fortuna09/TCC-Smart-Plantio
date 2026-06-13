@@ -3,6 +3,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 import axios from "axios";
 import { Box, Typography, useTheme, Button, useMediaQuery,Checkbox, FormControlLabel, Modal, Backdrop, Fade, Chip,Tooltip,IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -352,6 +353,11 @@ const SafrasPage = () => {
 
     return (
         <Box m="20px">
+            <Box display="flex" alignItems="center" mb="10px">
+                <IconButton onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+                    <ArrowBackIcon />
+                </IconButton>
+            </Box>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Header title="Safra" subtitle="Informações da safra" />
                 <Box>

@@ -27,8 +27,8 @@ useEffect(() => {
   if (userData && userData.email) { 
     const fetchLineData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/custos-glebas-line-chart`, {
-          params: { safraId: 1 }, headers: {Authorization: `Bearer ${token}`}
+        const response = await axios.get(`/custos-glebas-line-chart`, {
+          params: { safraId: safraId }, headers: {Authorization: `Bearer ${token}`}
         });
                     
         setLineData(response.data);                       
@@ -45,7 +45,7 @@ useEffect(() => {
     };
     fetchLineData();
   }
-}, [userData]);  
+}, [userData, safraId]);  
 
   // Função para formatação de valores em dinheiro
   const formatCurrency = (value) => {

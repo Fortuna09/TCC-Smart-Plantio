@@ -1,4 +1,5 @@
-import { Box, Button, TextField, Typography, useTheme, Snackbar, Alert, CircularProgress } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, Snackbar, Alert, CircularProgress, IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik } from "formik";
 import { tokens } from "../../theme";
@@ -99,6 +100,11 @@ const PropertiesEditForm = () => {
 
     return (
         <Box m="20px">
+      <Box display="flex" alignItems="center" mb="10px">
+      <IconButton onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+      <ArrowBackIcon />
+      </IconButton>
+      </Box>
             <Header title="Editar Propriedade" subtitle="Edite as informações da Propriedade" />
 
             <Formik
