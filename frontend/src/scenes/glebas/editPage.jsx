@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography,useMediaQuery, useTheme,Autocomplete } from "@mui/material";
+import { Box, Button, TextField, Typography,useMediaQuery, useTheme,Autocomplete, CircularProgress } from "@mui/material";
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik } from "formik";
 import { tokens } from "../../theme";
@@ -95,7 +95,11 @@ const GlebasEditForm = () => {
   };
 
   if (loading) {
-    return <Typography variant="h4" fontWeight="bold" sx={{ml: "50px"}}>Carregando...</Typography>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <CircularProgress color="success" />
+      </Box>
+    );
   }
   
   return (
@@ -105,6 +109,7 @@ const GlebasEditForm = () => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
+        enableReinitialize
         validationSchema={checkoutSchema}
       >
         {({

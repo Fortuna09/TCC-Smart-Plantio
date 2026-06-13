@@ -7,6 +7,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../components/Header";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from "axios";
 import secureLocalStorage from 'react-secure-storage';
@@ -103,34 +104,21 @@ const Properties = () => {
                     <Box 
                         display="flex" 
                         justifyContent="center" 
+                        gap="8px"
                         width="100%"
                         m="10px auto"
                     >
-                        {isMobile ? (
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
-                                        <VisibilityIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </>
-                        ):(
-                            <>
-                                <Tooltip title="Visualizar">
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: colors.greenAccent[500],
-                                            "&:hover": {
-                                                backgroundColor: colors.grey[700], 
-                                            },
-                                        }}
-                                        onClick={() => handleView(id)}
-                                    >
-                                        <VisibilityIcon />
-                                    </Button>
-                                </Tooltip>
-                            </>
+                        <Tooltip title="Visualizar">
+                            <IconButton onClick={() => handleView(id)} sx={{ color: colors.greenAccent[500]}}>
+                                <VisibilityIcon />
+                            </IconButton>
+                        </Tooltip>
+                        {params.row.access === "owner" && (
+                            <Tooltip title="Editar">
+                                <IconButton onClick={() => navigate(`/propriedades/edit/${id}`)} sx={{ color: colors.orangeAccent[500]}}>
+                                    <EditIcon />
+                                </IconButton>
+                            </Tooltip>
                         )}
                     </Box>
                 );

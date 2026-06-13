@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery, CircularProgress } from "@mui/material";
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik } from "formik";
 import { tokens } from "../../theme";
@@ -22,12 +22,9 @@ const StorageForm = () => {
 
 
   const fields = [
-    { name: "unit", label: "Unidade", type: "text" },
-    { name: "date", label: "Data de Validade", type: "date" },
+    { name: "unit", label: "Unidade", type: "text", helperText: "Ex: kg, L, saca, ton, cx, un" },
+    { name: "date", label: "Data de Validade / Vencimento", type: "date" },
     { name: "quantity", label: "Quantidade", type: "number" },
-    //{ name: "price", label: "Preço", type: "number" },
-    //{ name: "totalValue", label: "Valor total", type: "number", disabled: true },
-    
   ];
 
   const categoryOptions = [
@@ -152,7 +149,11 @@ const StorageForm = () => {
   };
 
   if (loading) {
-    return <Typography variant="h4" fontWeight="bold" sx={{ml: "50px"}}>Carregando...</Typography>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <CircularProgress color="success" />
+      </Box>
+    );
   }
   
   return (
@@ -255,7 +256,7 @@ const StorageForm = () => {
                 sx={{ gridColumn: isSmallDevice ? "span 4" : "span 1" }}
                 noOptionsText="Não Encontrado"
               />
-              {fields.map(({ name, label, type, disabled, }) => (
+              {fields.map(({ name, label, type, disabled, helperText: fieldHelperText }) => (
                   <TextField
                     key={name}
                     fullWidth
@@ -280,7 +281,7 @@ const StorageForm = () => {
                     name={name}
                     disabled={disabled}
                     error={touched[name] && Boolean(errors[name])}
-                    helperText={touched[name] && errors[name]}
+                    helperText={(touched[name] && errors[name]) || fieldHelperText || ""}
                     InputLabelProps={type === "date" ? { shrink: true } : {}}
                     sx={{ gridColumn: isSmallDevice ? "span 4" : "span 1" }}
                   />

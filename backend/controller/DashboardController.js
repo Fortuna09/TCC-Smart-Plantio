@@ -127,45 +127,44 @@ router.get('/all-custos-pie-chart', verifyToken, async (req, res) => {
     const query = `
         SELECT category, SUM(totalValue) AS value
         FROM Custos
-        WHERE safraId = :safraId
+        WHERE safraId IN (:safraIds)
         AND type = 'Realizado' AND status = false
         GROUP BY category;
     `;
-    let sumCustos = 0;
-    for (let safraId of uniqueSafraIds) {
-        try {
-            sumCustos  = await connection.query(query, {
-                replacements: { safraId },  
-                type: QueryTypes.SELECT
-            });
 
-            const categories = [
-                'Defensivos',
-                'Operações',
-                'Sementes',
-                'Arrendamento',
-                'Administrativo',
-                'Corretivos e Fertilizantes'
-            ];
-          
-            const result = categories.map(category => {
-                const categoryFound = Array.isArray(sumCustos) ? sumCustos.find(result => result.category === category) : null;
-                return {
-                    id: category, 
-                    label: category,
-                    value: categoryFound ? categoryFound.value : 0 
-                };
-            });
-            const allValuesAreZero = result.every(item => item.value === 0);
+    try {
+        const sumCustos = await connection.query(query, {
+            replacements: { safraIds: uniqueSafraIds },
+            type: QueryTypes.SELECT
+        });
 
-            if (allValuesAreZero) {
-                return res.status(404).json({ error: "Safras não possuem custos." });
-            } 
-            return res.json(result);
+        const categories = [
+            'Defensivos',
+            'Operações',
+            'Sementes',
+            'Arrendamento',
+            'Administrativo',
+            'Corretivos e Fertilizantes'
+        ];
 
-        } catch (error) {
-          console.error(`Erro ao buscar custos para safraId ${safraId}:`, error);
+        const result = categories.map(category => {
+            const categoryFound = Array.isArray(sumCustos) ? sumCustos.find(r => r.category === category) : null;
+            return {
+                id: category,
+                label: category,
+                value: categoryFound ? Number(categoryFound.value) : 0
+            };
+        });
+
+        const allValuesAreZero = result.every(item => item.value === 0);
+        if (allValuesAreZero) {
+            return res.status(404).json({ error: "Safras não possuem custos." });
         }
+        return res.json(result);
+
+    } catch (error) {
+        console.error('Erro ao buscar custos agregados:', error);
+        return res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
     }
 });
 

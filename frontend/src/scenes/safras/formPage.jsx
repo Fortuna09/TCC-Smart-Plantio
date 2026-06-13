@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField,Switch, Typography, useTheme, FormGroup, FormControlLabel,Autocomplete, useMediaQuery,FormHelperText,IconButton } from "@mui/material";
+import { Box, Button, TextField,Switch, Typography, useTheme, FormGroup, FormControlLabel,Autocomplete, useMediaQuery,FormHelperText,IconButton, CircularProgress } from "@mui/material";
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik, Field } from "formik";
 import { tokens } from "../../theme";
@@ -132,11 +132,11 @@ const SafrasForm = () => {
 
   const handleSwitchChange = (event, setFieldValue) => {
     const value = event.target.checked;
-    setFieldValue('useDefault', value); // Atualiza o Formik com o valor do switch
+    setFieldValue('useDefault', value);
     if (value) {
-      setFieldValue('safraName', 'Safra - 2025/1'); // Preenche com o valor padrão
+      setFieldValue('safraName', `Safra - ${currentYear}${period}`);
     } else {
-      setFieldValue('safraName', ''); // Limpa o campo quando desmarcado
+      setFieldValue('safraName', '');
     }
   };
 
@@ -177,7 +177,11 @@ const SafrasForm = () => {
   };
 
   if (loading) {
-    return <Typography variant="h4" fontWeight="bold" sx={{ml: "50px"}}>Carregando...</Typography>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <CircularProgress color="success" />
+      </Box>
+    );
   }
   
   return (
@@ -358,7 +362,10 @@ const checkoutSchema = yup.object().shape({
   toneladas: yup.number().required("Campo de preenchimento obrigatório").positive("Deve ser um número positivo"),
   adubo: yup.string().required("Campo de preenchimento obrigatório"),
   dataFimPlantio: yup.date().required("Campo de preenchimento obrigatório").typeError("Deve ser uma data válida"),
-  dataFimColheita: yup.date().required("Campo de preenchimento obrigatório").typeError("Deve ser uma data válida"),
+  dataFimColheita: yup.date()
+    .required("Campo de preenchimento obrigatório")
+    .typeError("Deve ser uma data válida")
+    .min(yup.ref('dataFimPlantio'), "Data de colheita deve ser posterior à data de plantio"),
   //tempoLavoura: yup.number().required("Campo de preenchimento obrigatório").positive("Deve ser um número positivo"),
   prodPrevista: yup.number().required("Campo de preenchimento obrigatório").positive("Deve ser um número positivo"),
   gleba: yup.array().min(1, "Selecione ao menos uma gleba").required("Campo de preenchimento obrigatório"),  

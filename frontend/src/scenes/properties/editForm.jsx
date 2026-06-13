@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography, useTheme, Snackbar, Alert } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, Snackbar, Alert, CircularProgress } from "@mui/material";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik } from "formik";
 import { tokens } from "../../theme";
@@ -90,7 +90,11 @@ const PropertiesEditForm = () => {
 
     // Se estiver carregando, mostre um loader ou uma mensagem
     if (loading) {
-        return <Typography>Carregando...</Typography>;
+        return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <CircularProgress color="success" />
+      </Box>
+    );
     }
 
     return (
@@ -100,6 +104,7 @@ const PropertiesEditForm = () => {
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
+                enableReinitialize
                 validationSchema={checkoutSchema}
             >
                 {({

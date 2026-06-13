@@ -161,7 +161,11 @@ const StorageForm = () => {
   };
 
   if (loading) {
-    return <Typography variant="h4" fontWeight="bold" sx={{ml: "50px"}}>Carregando...</Typography>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
+        <CircularProgress color="success" />
+      </Box>
+    );
   }
   
   return (

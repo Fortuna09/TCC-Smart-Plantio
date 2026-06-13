@@ -65,7 +65,7 @@ const PieChart = ({isDashboard, safraId }) => {
       };
       fetchPieData();
     }
-  }, [userData]);  
+  }, [userData, safraId]);  
 
   return (
     emptyData ? (
