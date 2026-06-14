@@ -16,6 +16,17 @@ const Custo = require("../database/Custo");
 const SafraGleba = require("../database/SafraGleba");
 const StorageItem = require("../database/StorageItem");
 
+/* Rota diagnóstico - testa conexão com banco */
+router.get('/ping-db', verifyToken, async (req, res) => {
+    try {
+        await connection.authenticate();
+        const [result] = await connection.query('SELECT COUNT(*) AS cnt FROM safras', { type: QueryTypes.SELECT });
+        res.json({ ok: true, safrasCount: result.cnt });
+    } catch (error) {
+        res.status(500).json({ ok: false, error: error.message });
+    }
+});
+
 /*  Rota para --> GRÁFICO DE PIZZA DE CUSTOS */
 router.get('/custos-pie-chart', verifyToken, async (req, res) => {
     const { safraId } = req.query;
@@ -60,7 +71,7 @@ router.get('/custos-pie-chart', verifyToken, async (req, res) => {
         return res.json(result);
       } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
       }
 });
 
@@ -144,7 +155,7 @@ router.get('/all-custos-pie-chart', verifyToken, async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao buscar custos agregados:', error);
-        return res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        return res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
     }
 });
 
@@ -210,7 +221,7 @@ router.get('/custos-glebas-line-chart', verifyToken, async (req, res) => {
         return res.json(result);
       } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
       }
 });
 
@@ -293,7 +304,7 @@ router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
         return res.json(result);
       } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
       }
 });
 
@@ -361,7 +372,7 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
         return res.json(result);
       } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
       }
 });
 
@@ -398,7 +409,7 @@ router.get('/custos-categoria-bar-chart', verifyToken, async (req, res) => {
         return res.json(sumCustos);
       } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
       }
 });
 
@@ -475,7 +486,7 @@ router.get('/report-safra', verifyToken, async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
     }
 });
 
@@ -713,7 +724,7 @@ router.get('/report-custo', verifyToken, async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao executar a consulta:', error);
-        res.status(500).json({ error: 'Erro ao acessar o banco de dados' });
+        res.status(500).json({ error: 'Erro ao acessar o banco de dados', debug: error.message });
     }
 });
 
