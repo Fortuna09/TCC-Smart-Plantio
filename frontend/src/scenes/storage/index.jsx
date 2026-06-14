@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, useTheme, Button, useMediaQuery,Snackbar, Alert,Tooltip,IconButton,} from "@mui/material";
 import { useNavigate,useLocation } from 'react-router-dom';
-import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector } from "@mui/x-data-grid";
+import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -243,6 +243,24 @@ const Storage = () => {
                     <DataGrid
                         rows={storageData}
                         columns={columns}
+                        localeText={{
+                            toolbarColumns: 'Colunas',
+                            toolbarColumnsLabel: 'Selecionar colunas',
+                            toolbarDensity: 'Densidade',
+                            toolbarDensityLabel: 'Densidade',
+                            toolbarDensityCompact: 'Compacto',
+                            toolbarDensityStandard: 'Padrão',
+                            toolbarDensityComfortable: 'Confortável',
+                            MuiTablePagination: {
+                                labelRowsPerPage: 'Linhas por página:',
+                                labelDisplayedRows: ({ from, to, count }) =>
+                                    `${from}–${to} de ${count !== -1 ? count : `mais de ${to}`}`,
+                            },
+                            noRowsLabel: 'Nenhum item no estoque encontrado.',
+                            footerTotalRows: 'Linhas totais:',
+                            footerRowSelected: count =>
+                                count !== 1 ? `${count.toLocaleString()} linhas selecionadas` : `${count.toLocaleString()} linha selecionada`,
+                        }}
                         slots={{ toolbar: CustomToolbar }}
                         getRowId={(row) => row.id}
                     />
@@ -293,7 +311,6 @@ function CustomToolbar() {
             display: 'flex',
           }}>
           <GridToolbarColumnsButton  /> 
-          <GridToolbarFilterButton /> 
           <GridToolbarDensitySelector  /> 
         </Box>
       </GridToolbarContainer>

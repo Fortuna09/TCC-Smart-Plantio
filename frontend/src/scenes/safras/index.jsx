@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography,TextField, useTheme, Button, useMediaQuery,Snackbar,Alert,Tooltip,IconButton, Paper, Tabs, Tab} from "@mui/material";
-import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
+import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { styled } from '@mui/system';
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios from "axios";
@@ -356,7 +356,24 @@ const Safras = () => {
                         rows={safraType === 0 ? safrasPlanejadas : safrasRealizadas}
                         columns={safraType === 0 ? columnsPlanejadas : columnsRealizadas}
                         slots={{ toolbar: CustomToolbar }}
-                        localeText={{ noRowsLabel: safraType === 0 ? <h2>Nenhuma safra planejada encontrada.</h2> :  <h2>Nenhuma safra realizada encontrada.</h2>}}
+                        localeText={{
+                            toolbarColumns: 'Colunas',
+                            toolbarColumnsLabel: 'Selecionar colunas',
+                            toolbarDensity: 'Densidade',
+                            toolbarDensityLabel: 'Densidade',
+                            toolbarDensityCompact: 'Compacto',
+                            toolbarDensityStandard: 'Padrão',
+                            toolbarDensityComfortable: 'Confortável',
+                            MuiTablePagination: {
+                                labelRowsPerPage: 'Linhas por página:',
+                                labelDisplayedRows: ({ from, to, count }) =>
+                                    `${from}–${to} de ${count !== -1 ? count : `mais de ${to}`}`,
+                            },
+                            noRowsLabel: safraType === 0 ? 'Nenhuma safra planejada encontrada.' : 'Nenhuma safra realizada encontrada.',
+                            footerTotalRows: 'Linhas totais:',
+                            footerRowSelected: count =>
+                                count !== 1 ? `${count.toLocaleString()} linhas selecionadas` : `${count.toLocaleString()} linha selecionada`,
+                        }}
                     />                    
                 )}
             </Box>
@@ -405,7 +422,6 @@ function CustomToolbar() {
             display: 'flex',
           }}>
           <GridToolbarColumnsButton  /> 
-          <GridToolbarFilterButton /> 
           <GridToolbarDensitySelector  /> 
         </Box>
       </GridToolbarContainer>

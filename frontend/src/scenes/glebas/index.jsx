@@ -3,7 +3,7 @@ import { Box, Typography, useTheme, Button, useMediaQuery,Snackbar, Alert,Toolti
 import { useNavigate,useLocation } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 import axios from "axios";
-import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
+import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
 import { mockDataFazenda } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -250,7 +250,24 @@ const Glebas = () => {
                     <DataGrid
                         rows={glebas}
                         columns={columns}
-                        localeText={{ noRowsLabel: <b>Nenhum talhão encontrado.</b> }}
+                        localeText={{
+                            toolbarColumns: 'Colunas',
+                            toolbarColumnsLabel: 'Selecionar colunas',
+                            toolbarDensity: 'Densidade',
+                            toolbarDensityLabel: 'Densidade',
+                            toolbarDensityCompact: 'Compacto',
+                            toolbarDensityStandard: 'Padrão',
+                            toolbarDensityComfortable: 'Confortável',
+                            MuiTablePagination: {
+                                labelRowsPerPage: 'Linhas por página:',
+                                labelDisplayedRows: ({ from, to, count }) =>
+                                    `${from}–${to} de ${count !== -1 ? count : `mais de ${to}`}`,
+                            },
+                            noRowsLabel: 'Nenhum talhão encontrado.',
+                            footerTotalRows: 'Linhas totais:',
+                            footerRowSelected: count =>
+                                count !== 1 ? `${count.toLocaleString()} linhas selecionadas` : `${count.toLocaleString()} linha selecionada`,
+                        }}
                         initialState={{
                             ...glebas.initialState,
                             pagination: { paginationModel: { pageSize: 15 } },
@@ -303,7 +320,6 @@ function CustomToolbar() {
             display: 'flex',
           }}>
           <GridToolbarColumnsButton  /> 
-          <GridToolbarFilterButton /> 
           <GridToolbarDensitySelector  /> 
         </Box>
       </GridToolbarContainer>

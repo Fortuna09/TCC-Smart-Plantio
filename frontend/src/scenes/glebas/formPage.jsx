@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery, IconButton } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, Autocomplete, useMediaQuery, IconButton, CircularProgress } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Formik } from "formik";
@@ -19,6 +19,7 @@ const GlebasForm = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [property,setProperty] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const GlebasForm = () => {
   const navigate = useNavigate(); 
   const handleFormSubmit = async (values) => {
     console.log("Valores do formulário:", values);
+    setIsSubmitting(true);
     try {
       const response = await axios.post("http://localhost:3000/glebas", {
         name: values.nameGleba,
@@ -79,7 +81,7 @@ const GlebasForm = () => {
   
       if (response.status === 201) {
         //console.log("Gleba criada com sucesso:", response.data);
-  
+        await new Promise(resolve => setTimeout(resolve, 800));
         navigate(`/talhoes?message=${encodeURIComponent("1")}`);
       }
     } catch (error) {
@@ -92,6 +94,8 @@ const GlebasForm = () => {
         console.error("Erro ao criar talhão: " , error);
       }
       
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -208,6 +212,7 @@ const GlebasForm = () => {
             <Box display="flex" justifyContent="end" mt="20px">
               <Button 
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{ 
                         backgroundColor: colors.mygreen[400],
                         color: colors.grey[100],
@@ -218,7 +223,7 @@ const GlebasForm = () => {
                         },
                     }} 
                     variant="contained">
-                Adicionar
+                {isSubmitting ? <CircularProgress size={22} color="inherit" /> : 'Salvar'}
               </Button>
             </Box>
           </form>

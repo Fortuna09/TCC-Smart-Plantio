@@ -21,6 +21,7 @@ const SafrasForm = () => {
   const [glebaOptions,setGlebaOptions] = useState([]);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams(); 
 
   const [useDefault, setUseDefault] = useState(true); 
@@ -144,6 +145,7 @@ const SafrasForm = () => {
   const navigate = useNavigate(); 
   const handleFormSubmit = async (values) => {
     //console.log(values);
+    setIsSubmitting(true);
     try {
       const response = await axios.post("http://localhost:3000/safras", {
         email: userData.email,
@@ -161,6 +163,7 @@ const SafrasForm = () => {
         estimatedSalePrice: values.precoVendaEstimado,
       }, {headers: {Authorization: `Bearer ${token}`}});
       if (response.status === 201) {  
+        await new Promise(resolve => setTimeout(resolve, 800));
         navigate(`/safras?message=${encodeURIComponent("1")}`);
       }
       
@@ -174,6 +177,8 @@ const SafrasForm = () => {
         console.error("Erro ao criar safra: " , error);
       }
       
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -335,6 +340,7 @@ const SafrasForm = () => {
             <Box display="flex" justifyContent="end" mt="20px">
               <Button 
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{ 
                             backgroundColor: colors.mygreen[400],
                             color: colors.grey[100],
@@ -345,7 +351,7 @@ const SafrasForm = () => {
                                 },
                     }} 
                     variant="contained">
-                Adicionar
+                {isSubmitting ? <CircularProgress size={22} color="inherit" /> : 'Salvar'}
               </Button>
             </Box>
             {/*Object.keys(errors).length > 0 && (

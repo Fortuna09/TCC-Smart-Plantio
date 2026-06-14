@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, useTheme, IconButton } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme, IconButton, CircularProgress } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from "formik";
@@ -17,6 +17,7 @@ const PropertiesForm = () => {
   const colors = tokens(theme.palette.mode);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [userData, setUserData] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const storedUser = secureLocalStorage.getItem('userData'); 
@@ -28,6 +29,7 @@ const PropertiesForm = () => {
   const navigate = useNavigate(); 
 
   const handleFormSubmit = async (values) => {
+  setIsSubmitting(true);
   try {
     console.log(userData.email);
     // Realizar a requisição POST para o backend usando axios
@@ -39,10 +41,10 @@ const PropertiesForm = () => {
       },{
         headers: {Authorization: `Bearer ${token}`}
       });
-
+ 
     if (response.status === 201) {
       //console.log("Propriedade criada com sucesso:", response.data);
-
+      await new Promise(resolve => setTimeout(resolve, 800));
       navigate(`/propriedades?message=${encodeURIComponent("1")}`);
     }
   } catch (error) {
@@ -54,6 +56,8 @@ const PropertiesForm = () => {
     } else {
     console.error("Erro ao criar propriedade:", error);
     }
+  } finally {
+    setIsSubmitting(false);
   }
 };
 
@@ -133,6 +137,7 @@ const PropertiesForm = () => {
             <Box display="flex" justifyContent="end" mt="20px">
               <Button 
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{ 
                       backgroundColor: colors.mygreen[400],
                       color: colors.grey[100],
@@ -143,7 +148,7 @@ const PropertiesForm = () => {
                       },
                     }} 
                     variant="contained">
-                Adicionar
+                {isSubmitting ? <CircularProgress size={22} color="inherit" /> : 'Salvar'}
               </Button>
             </Box>
           </form>

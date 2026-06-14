@@ -22,6 +22,7 @@ const CustosForm = () => {
   const [glebaOptions, setGlebaOptions] = useState([]);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams(); 
 
 
@@ -168,6 +169,7 @@ const CustosForm = () => {
 
   const navigate = useNavigate(); 
   const handleFormSubmit = async (values) => {
+    setIsSubmitting(true);
     try {
       const response = await axios.post("http://localhost:3000/custos", {
         
@@ -184,6 +186,7 @@ const CustosForm = () => {
         note: values.note || null,
       }, {headers: {Authorization: `Bearer ${token}`}} );
       if (response.status === 201) {  
+        await new Promise(resolve => setTimeout(resolve, 800));
         navigate(`/custos?message=${encodeURIComponent("1")}`);
       }
       
@@ -197,6 +200,8 @@ const CustosForm = () => {
         console.error("Erro ao criar custo: " , error);
       }
       
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -442,6 +447,7 @@ const CustosForm = () => {
             <Box display="flex" justifyContent="end" mt="20px">
               <Button 
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{ 
                         backgroundColor: colors.mygreen[400],
                         color: colors.grey[100],
@@ -452,7 +458,7 @@ const CustosForm = () => {
                           },
                     }} 
                     variant="contained">
-                Adicionar
+                {isSubmitting ? <CircularProgress size={22} color="inherit" /> : 'Salvar'}
               </Button>
             </Box>
             {/*Object.keys(errors).length > 0 && (

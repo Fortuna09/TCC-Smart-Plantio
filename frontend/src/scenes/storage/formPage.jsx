@@ -19,6 +19,7 @@ const StorageForm = () => {
   const [properties, setProperties] = useState([]);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams(); 
 
 
@@ -116,6 +117,7 @@ const StorageForm = () => {
 
   const navigate = useNavigate(); 
   const handleFormSubmit = async (values) => {
+    setIsSubmitting(true);
     try {
       const response = await axios.post("http://localhost:3000/storage", {
         email: userData.email,
@@ -134,6 +136,7 @@ const StorageForm = () => {
         headers: {Authorization: `Bearer ${token}`}
       });
       if (response.status === 201) {  
+        await new Promise(resolve => setTimeout(resolve, 800));
         navigate(`/estoque?message=${encodeURIComponent("1")}`);
       }
       
@@ -146,6 +149,8 @@ const StorageForm = () => {
       } else {
         console.error("Erro ao criar item no estoque: " , error);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -349,6 +354,7 @@ const StorageForm = () => {
             <Box display="flex" justifyContent="end" mt="20px">
               <Button 
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{ 
                       backgroundColor: colors.mygreen[400],
                       color: colors.grey[100],
@@ -359,7 +365,7 @@ const StorageForm = () => {
                       },
                     }} 
                     variant="contained">
-                Adicionar
+                {isSubmitting ? <CircularProgress size={22} color="inherit" /> : 'Salvar'}
               </Button>
             </Box>
             {/*Object.keys(errors).length > 0 && (
