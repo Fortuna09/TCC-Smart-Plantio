@@ -23,7 +23,7 @@ router.get('/custos-pie-chart', verifyToken, async (req, res) => {
     //Somando custos por categoria
     const query = `
       SELECT category, SUM(totalValue) AS value
-      FROM Custos
+      FROM custos
       WHERE safraId = :safraId
       AND type = 'Planejado'
       GROUP BY category;
@@ -68,83 +68,63 @@ router.get('/custos-pie-chart', verifyToken, async (req, res) => {
 router.get('/all-custos-pie-chart', verifyToken, async (req, res) => {
     const userEmail = req.user.email;
 
-    const user = await User.findOne({ where: { email: userEmail } });
-    if (!user) {
-        return res.status(404).json({ error: 'Usuário não encontrado' });
-    }
-
-    /* Busca todas as propriedades associadas ao usuário e seus níveis de acesso*/
-    const userProperties = await UserProperty.findAll({
-        where: { userId: user.id },
-        attributes: ['propertyId', 'access']
-    });
-
-    if(userProperties.length === 0){
-        return res.status(404).json({ error: "Usuário não possui propriedades." });
-    }
-
-    const propertyIds = userProperties.map(up => up.propertyId);
-    const access = userProperties.map(up => up.access);
-    
-    const properties = await Property.findAll({
-        where: {
-            id: propertyIds
-        },
-        include: {
-            model: Gleba, as: 'glebas', 
-            include: {
-                model: Safra, as: 'safras',
-                where: {
-                    type: 'Realizado',  
-                    status: false         
-                }
-            }
-        }
-    });
-
-    let allSafrasEmpty = true;
-
-    
-
-    const safraIds = new Set();  
-
-    properties.forEach(property => {
-        property.glebas.forEach(gleba => {
-            if (gleba.safras && gleba.safras.length > 0) {
-                allSafrasEmpty = false;
-            }
-            gleba.safras.forEach(safra => {
-                safraIds.add(safra.id);  
-            });
-        });
-    });
-
-    if (allSafrasEmpty) {
-        return res.status(404).json({ error: "Usuário não possui safras realizadas." });
-    } 
-
-    const uniqueSafraIds = [...safraIds];
     const query = `
         SELECT category, SUM(totalValue) AS value
-        FROM Custos
+        FROM custos
         WHERE safraId IN (:safraIds)
         AND type = 'Realizado' AND status = false
         GROUP BY category;
     `;
 
     try {
+        const user = await User.findOne({ where: { email: userEmail } });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        const userProperties = await UserProperty.findAll({
+            where: { userId: user.id },
+            attributes: ['propertyId', 'access']
+        });
+
+        if (userProperties.length === 0) {
+            return res.status(404).json({ error: "Usuário não possui propriedades." });
+        }
+
+        const propertyIds = userProperties.map(up => up.propertyId);
+        
+        const properties = await Property.findAll({
+            where: { id: propertyIds },
+            include: {
+                model: Gleba, as: 'glebas', 
+                include: {
+                    model: Safra, as: 'safras',
+                    where: { type: 'Realizado', status: false },
+                    required: false
+                }
+            }
+        });
+
+        const safraIds = new Set();
+        properties.forEach(property => {
+            property.glebas.forEach(gleba => {
+                (gleba.safras || []).forEach(safra => safraIds.add(safra.id));
+            });
+        });
+
+        if (safraIds.size === 0) {
+            return res.status(404).json({ error: "Usuário não possui safras realizadas." });
+        }
+
+        const uniqueSafraIds = [...safraIds];
         const sumCustos = await connection.query(query, {
             replacements: { safraIds: uniqueSafraIds },
             type: QueryTypes.SELECT
         });
 
         const categories = [
-            'Defensivos',
-            'Operações',
-            'Sementes',
-            'Arrendamento',
-            'Administrativo',
-            'Corretivos e Fertilizantes'
+            'Defensivos', 'Operações', 'Sementes',
+            'Arrendamento', 'Administrativo', 'Corretivos e Fertilizantes'
         ];
 
         const result = categories.map(category => {
@@ -181,9 +161,8 @@ router.get('/custos-glebas-line-chart', verifyToken, async (req, res) => {
         FROM 
             (SELECT DISTINCT glebaId FROM safra_glebas WHERE safraId = :safraId) AS sg
         CROSS JOIN 
-            (SELECT DISTINCT category FROM Custos) AS c
-        LEFT JOIN 
-            Custos AS custos
+            (SELECT DISTINCT category FROM custos) AS c
+        LEFT JOIN custos AS custos
         ON 
             custos.glebaId = sg.glebaId 
             AND custos.category = c.category 
@@ -247,9 +226,8 @@ router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
         FROM 
             (SELECT DISTINCT glebaId FROM safra_glebas WHERE safraId = :safraId) AS sg
         CROSS JOIN 
-            (SELECT DISTINCT category FROM Custos) AS c
-        LEFT JOIN 
-            Custos AS custos
+            (SELECT DISTINCT category FROM custos) AS c
+        LEFT JOIN custos AS custos
         ON 
             custos.glebaId = sg.glebaId 
             AND custos.category = c.category 
@@ -287,6 +265,10 @@ router.get('/custos-glebas-bar-chart', verifyToken, async (req, res) => {
         ];
          
         const glebaIds = [...new Set(sumCustos.map(item => item.glebaId))];
+
+        if (glebaIds.length === 0) {
+            return res.json([]);
+        }
 
         const glebasInfo = await Gleba.findAll({
             where: {
@@ -330,8 +312,7 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
             (SELECT DISTINCT glebaId FROM safra_glebas WHERE safraId = :safraId) AS sg
         JOIN 
             glebas AS g ON g.id = sg.glebaId
-        LEFT JOIN 
-            Custos AS c ON 
+        LEFT JOIN custos AS c ON 
                 c.glebaId = sg.glebaId 
                 AND c.safraId = :safraId
                 AND c.type = :type
@@ -352,6 +333,10 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
          
         const glebaIds = [...new Set(sumCustos.map(item => item.glebaId))];
 
+        if (glebaIds.length === 0) {
+            return res.json([]);
+        }
+
         const glebasInfo = await Gleba.findAll({
             where: {
                 id: glebaIds
@@ -366,7 +351,7 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
 
             sumCustos.forEach(item => {
                 if (item.glebaId === gleba.id) {
-                    glebaData["custo"] = item.value_per_hectare.toFixed(2); 
+                    glebaData["custo"] = item.value_per_hectare ? item.value_per_hectare.toFixed(2) : "0.00"; 
                 }
             });
     
@@ -384,21 +369,21 @@ router.get('/custos-hectares-glebas-bar-chart', verifyToken, async (req, res) =>
 router.get('/custos-categoria-bar-chart', verifyToken, async (req, res) => {
     const { id } = req.query;
 
-    const safra = await Safra.findByPk(id);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     //Somando custos por categoria
     const query = `
        SELECT category, SUM(totalValue) AS value
-        FROM Custos
+        FROM custos
         WHERE safraId = :id
         AND type = 'Realizado'
         GROUP BY category;
     `;
   
     try {
+        const safra = await Safra.findByPk(id);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const sumCustos = await connection.query(query, {
           replacements: { id },  
           type: QueryTypes.SELECT  
@@ -421,11 +406,6 @@ router.get('/custos-categoria-bar-chart', verifyToken, async (req, res) => {
 router.get('/report-safra', verifyToken, async (req, res) => {
     const { id } = req.query;
 
-    const safra = await Safra.findByPk(id);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     const query = `
         SELECT SUM(totalValue) AS totalCustos
         FROM custos
@@ -434,6 +414,11 @@ router.get('/report-safra', verifyToken, async (req, res) => {
     `;
   
     try {
+        const safra = await Safra.findByPk(id);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const type = safra.type;
         const [sumCustos] = await connection.query(query, {
           replacements: { id, type },  
@@ -498,11 +483,6 @@ router.get('/report-safra', verifyToken, async (req, res) => {
 router.get('/report-custo', verifyToken, async (req, res) => {
     const { id } = req.query;
 
-    const safra = await Safra.findByPk(id);
-        if (!safra) {
-            return res.status(404).json({ error: 'Safra não encontrado' });
-    }
-
     const query = `
         SELECT SUM(totalValue) AS totalCustos
         FROM custos
@@ -521,13 +501,18 @@ router.get('/report-custo', verifyToken, async (req, res) => {
 
     const queryDescritivo = `
         SELECT category, SUM(totalValue) AS value
-        FROM Custos
+        FROM custos
         WHERE safraId = :id
         AND type = :type
         GROUP BY category;
     `;
   
     try {
+        const safra = await Safra.findByPk(id);
+        if (!safra) {
+            return res.status(404).json({ error: 'Safra não encontrada' });
+        }
+
         const type = safra.type;
         const [sumCustos] = await connection.query(query, {
           replacements: { id, type },  
