@@ -16,8 +16,8 @@ const Custo = require("../database/Custo");
 const SafraGleba = require("../database/SafraGleba");
 const StorageItem = require("../database/StorageItem");
 
-/* Rota diagnóstico - testa conexão com banco */
-router.get('/ping-db', verifyToken, async (req, res) => {
+/* Rota diagnóstico - testa conexão com banco (sem auth para facilitar debug) */
+router.get('/ping-db', async (req, res) => {
     try {
         await connection.authenticate();
         const [result] = await connection.query('SELECT COUNT(*) AS cnt FROM safras', { type: QueryTypes.SELECT });
