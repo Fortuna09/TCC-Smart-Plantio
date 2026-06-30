@@ -1,0 +1,38 @@
+ARQUIVO DOCX CRIADO COM SUCESSO!
+Arquivo: TCC_MONOGRAFIA_SMARTPLANTIO_RAFAEL.docx
+Tamanho: 66 KB
+Local: c:\Users\rfortuna\source\repos\tcc\
+
+📝 PRÓXIMOS PASSOS - AJUSTES NO WORD:
+Agora abra o arquivo no Microsoft Word e faça os ajustes de formatação ABNT:
+
+1. CONFIGURAR PÁGINA (Layout)
+Margens: Superior e Esquerda = 3cm | Inferior e Direita = 2cm
+Tamanho: A4
+Orientação: Retrato
+2. FONTE E ESPAÇAMENTO
+Fonte do texto: Arial ou Times New Roman, tamanho 12
+Espaçamento: 1,5 linhas (corpo do texto)
+Títulos: Negrito, tamanho 12 (caps)
+Citações longas (>3 linhas): recuo 4cm, fonte 10, espaçamento simples
+3. NUMERAÇÃO DE PÁGINAS
+Elementos pré-textuais: SEM numeração visível (ou algarismos romanos)
+Elementos textuais: Começa no número 1 na INTRODUÇÃO (canto superior direito)
+4. SUMÁRIO
+O Pandoc já gerou automático com --toc
+Ajuste formatação se necessário (Referências → Sumário → Atualizar)
+5. CAPA E FOLHA DE ROSTO
+Ajuste alinhamentos, espaçamentos e formatação manual
+Centralizar títulos, nome, instituição, etc.
+6. TABELAS
+Revise se todas estão formatadas corretamente
+Adicione bordas se necessário
+Centralize ou alinhe conforme ABNT
+7. REFERÊNCIAS
+Já estão em ordem alfabética
+Ajuste espaçamento entre elas se necessário
+💡 DICA IMPORTANTE:
+Depois de ajustar tudo no Word, salve como:
+
+Versão editável: .docx (para futuras correções)
+Versão final: .pdf (File → Salvar Como → PDF)
