@@ -43,8 +43,7 @@ Brazilian agriculture faces a significant technological gap between large agribu
 ## LISTA DE FIGURAS
 
 Figura 1 — Comparação de tempo médio por tarefa (Rodada 1 vs. Rodada 2) ...................... XX  
-Figura 2 — Evolução do Net Promoter Score (NPS) ......................................................... XX  
-Figura 3 — Cronograma do estudo de campo (aplicabilidade) .......................................... XX
+Figura 2 — Evolução do Net Promoter Score (NPS) ......................................................... XX
 
 ---
 
@@ -397,7 +396,7 @@ Testes de aplicabilidade, ao contrário de testes de usabilidade, devem ser cond
 
 Por exemplo: um sistema pode ser perfeitamente usável (interface clara, navegação intuitiva, sem erros técnicos), mas ter baixa aplicabilidade se as categorias de custos não refletem a realidade das despesas agrícolas, se o fluxo de registro de safra não corresponde ao ciclo produtivo real, ou se os gráficos do dashboard mostram métricas irrelevantes para a tomada de decisão do agricultor.
 
-Este trabalho foca especificamente na avaliação de usabilidade através de duas rodadas de testes com 6 participantes de perfis variados. A avaliação de aplicabilidade, embora planejada conceitualmente no referencial teórico do artigo científico base, não foi conduzida e não faz parte do escopo deste TCC.
+Este trabalho foca especificamente na avaliação de **usabilidade** através de duas rodadas de testes com 6 participantes de perfis variados, aplicando métodos consolidados da área de Interação Humano-Computador.
 
 ---
 
@@ -873,7 +872,7 @@ Essa triangulação de perspectivas de diferentes perfis de usuários valida emp
 
 2. **Viés de familiaridade na Rodada 2**: Utilizar os mesmos participantes introduz familiaridade com as tarefas, mas esse trade-off é justificado pelo ganho em poder estatístico da comparação pareada.
 
-3. **Contexto de teste controlado**: Sessões de 30-40 minutos em laboratório não capturam completamente o contexto de uso real prolongado no campo (essa limitação seria endereçada por estudos de aplicabilidade futuros).
+3. **Contexto de teste controlado**: Sessões de 30-40 minutos em ambiente de laboratório não capturam completamente o contexto de uso real prolongado no campo, que exigiria estudos longitudinais complementares.
 
 A discussão completa e aprofundada dos resultados da Rodada 2, incluindo a validação empírica das hipóteses de melhoria, a análise estatística detalhada das variações percentuais em cada métrica, e a interpretação qualitativa dos feedbacks dos participantes após as correções, será elaborada e adicionada a esta seção após a coleta e análise dos dados da segunda rodada de testes.
 
@@ -903,9 +902,9 @@ A metodologia empregada — testes de usabilidade com protocolo Think-Aloud, mé
 
 **Trabalhos futuros recomendados:**
 
-1. Condução de estudos longitudinais de **aplicabilidade** com agricultores em contexto real de uso por períodos prolongados (4-8 semanas).
+1. Expansão da amostra de testes de usabilidade para incluir agricultores de diferentes regiões do Brasil e diferentes tipos de culturas.
 
-2. Expansão da amostra de testes de usabilidade para incluir agricultores de diferentes regiões do Brasil e diferentes tipos de culturas.
+2. Condução de estudos longitudinais em contexto real de uso com agricultores em atividade, por períodos prolongados (4-8 semanas), para avaliar a utilidade prática do sistema no cotidiano agrícola.
 
 3. Implementação de funcionalidades adicionais sugeridas pelos participantes (separação de categorias de culturas, integração com APIs de preços de mercado, alertas automáticos de tarefas agrícolas).
 
