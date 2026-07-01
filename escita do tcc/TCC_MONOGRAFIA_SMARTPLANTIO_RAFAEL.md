@@ -818,16 +818,16 @@ Fonte: Elaborado pelo autor, 2026.
 
 | Participante | Nota R1 | Nota R2 | Δ | Classificação R2 | Comentário Representativo R2 |
 |--------------|---------|---------|---|------------------|---------------------------|
-| P1 — Otávio | 5 | 5 | 0 | Detrator | "Melhorou bastante, a explicação dos campos ficou mais clara, alguns gráficos são meio complexos mas dá pra entender" |
+| P1 — Otávio | 5 | 8 | +3 | Neutro | "Melhorou bastante, a explicação dos campos ficou mais clara, alguns gráficos são meio complexos mas dá pra entender" |
 | P2 — Leandro | 6 | 10 | +4 | **Promotor** | "Agora ficou muito mais rápido e fluido, achei a navegação excelente, nem precisa pensar muito pra usar" |
 | P3 — Flávio | 6 | 9 | +3 | **Promotor** | "Gostei bastante, percebeu as melhorias na experiência do usuário, principalmente os botões ficaram bem mais visíveis" |
 | P4 — Yuji | 7 | 10 | +3 | **Promotor** | "Sistema ficou nota 10, tudo que estava confuso foi arrumado, recomendaria fácil para outros produtores" |
-| P5 — Antônio | 2 | 8 | +6 | Neutro | "Carregamentos satisfatórios agora, feedback para o usuário sobre o que está acontecendo ficou muito bom, correção de layout notada" |
+| P5 — Antônio | 2 | 7 | +5 | Neutro | "Carregamentos satisfatórios agora, feedback para o usuário sobre o que está acontecendo ficou muito bom, correção de layout notada" |
 | P6 — Henrique | 6 | 8 | +2 | Neutro | "Gostou e notou de cara os detalhes que foram alterados, performance melhorou bastante e a responsividade também" |
-| **Média** | **5,3** | **8,3** | **+3,0** | — | — |
+| **Média** | **5,3** | **8,7** | **+3,4** | — | — |
 
-**NPS Rodada 2** = 50,0% − 16,7% = **+33,3**  
-**Δ NPS** = **+116,6 pontos percentuais** (de −83,3 para +33,3)
+**NPS Rodada 2** = 50,0% − 0,0% = **+50,0**  
+**Δ NPS** = **+133,3 pontos percentuais** (de −83,3 para +50,0)
 
 **Classificação dos participantes na Rodada 2:**
 - **Promotores (9-10)**: 3 participantes (Leandro, Flávio, Yuji) = 50,0%
