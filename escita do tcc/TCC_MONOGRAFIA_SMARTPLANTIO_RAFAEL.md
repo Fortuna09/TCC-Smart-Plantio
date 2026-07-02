@@ -43,7 +43,15 @@ Brazilian agriculture faces a significant technological gap between large agribu
 ## LISTA DE FIGURAS
 
 Figura 1 — Comparação de tempo médio por tarefa (Rodada 1 vs. Rodada 2) ...................... XX  
-Figura 2 — Evolução do Net Promoter Score (NPS) ......................................................... XX
+Figura 2 — Evolução do Net Promoter Score (NPS) ......................................................... XX  
+Figura 3 — Problema P-01: Bug catastrófico na edição de talhões .................................. XX  
+Figura 4 — Problema P-02: Erro HTTP 500 na renderização de gráficos .......................... XX  
+Figura 5 — Problema P-03: Botão de edição difícil de localizar .................................... XX  
+Figura 6 — Problema P-04: Ausência de botão "Voltar" em formulários .......................... XX  
+Figura 7 — Problema P-07: Ausência de indicador de carregamento ............................... XX  
+Código 1 — Correção do bug catastrófico P-01 (edição de talhões) .............................. XX  
+Código 2 — Implementação de indicadores de carregamento (P-07) ................................. XX  
+Código 3 — Configuração de CORS e porta dinâmica para deploy .................................... XX
 
 ---
 
@@ -784,9 +792,304 @@ Fonte: Elaborado pelo autor, 2026.
 
 **Detalhamento técnico de correções críticas:**
 
-**P-01 (Catastrófica)**: O bug no endpoint PUT /glebas/:id estava causando falha silenciosa porque o backend não recebia o ID do talhão a ser editado. A correção envolveu modificação na rota Express para garantir que `req.params.id` fosse corretamente extraído e passado para a query Sequelize: `await Gleba.update(req.body, { where: { id: req.params.id } })`. Adicionalmente, o ícone de três pontos foi substituído por um ícone de lápis sempre visível, resolvendo também o problema P-03.
+### Código 1 — Correção do bug catastrófico P-01 (edição de talhões)
 
-**P-02 (Alta)**: Os erros HTTP 500 nos gráficos eram causados por três problemas simultâneos no backend: (1) case-sensitivity inconsistente nos nomes de tabelas MySQL (`Safras` vs `safras`), (2) queries que não validavam se o array de glebaIds estava vazio antes de fazer JOIN, gerando SQL inválido, e (3) ausência de blocos try-catch, fazendo com que exceções não tratadas derrubassem a requisição sem log adequado. Todas as queries foram envolvidas em try-catch e os casos de arrays vazios agora retornam dados vazios ao invés de erro.
+**P-01 (Catastrófica)**: O bug no endpoint PUT /glebas/:id estava causando falha silenciosa porque o backend não recebia o ID do talhão a ser editado. A Figura 3 ilustra o problema antes e depois da correção.
+
+![Figura 3 — Problema P-01: Bug catastrófico na edição de talhões](imagens/p01-antes-bug-editar-talhao.png.png)
+![Figura 3 (continuação) — Edição funcionando após correção](imagens/p01-depois-edicao-funcionando.png.png)
+
+**Figura 3 — Problema P-01: Bug catastrófico na edição de talhões**  
+(a) Rodada 1: requisição PUT falhava silenciosamente devido à ausência do ID na rota  
+(b) Rodada 2: edição funciona corretamente após correção do endpoint backend
+
+Fonte: Elaborado pelo autor, 2026.
+
+A correção técnica implementada está documentada no Código 1 abaixo:
+
+```javascript
+// ❌ ANTES (Bug catastrófico - Taxa de sucesso: 33,3%)
+// Arquivo: frontend/src/scenes/glebas/editPage.jsx
+
+const handleFormSubmit = async (values) => {
+  try {
+    // ⚠️ BUG: URL sem parâmetro :id - rota não bate com backend
+    const response = await axios.put(`http://localhost:3000/glebas`, {
+      name: values.nameGleba,
+      area: values.area, 
+      id: id  // ID enviado no body ao invés da URL
+    }, {
+      headers: {Authorization: `Bearer ${token}`}
+    });
+
+    if (response.status === 200) {  
+      navigate(`/talhoes?message=${encodeURIComponent("2")}`);
+    }
+  } catch (error) {
+    console.error("Erro ao editar talhão:", error);
+  }
+};
+
+// ✅ DEPOIS (Corrigido - Taxa de sucesso: 100%)
+// Arquivo: frontend/src/scenes/glebas/editPage.jsx
+
+const handleFormSubmit = async (values) => {
+  try {
+    // ✅ CORREÇÃO: ID adicionado na URL conforme esperado pelo backend
+    const response = await axios.put(`http://localhost:3000/glebas/${id}`, {
+      name: values.nameGleba,
+      area: values.area
+    }, {
+      headers: {Authorization: `Bearer ${token}`}
+    });
+
+    if (response.status === 200) {  
+      navigate(`/talhoes?message=${encodeURIComponent("2")}`);
+    }
+  } catch (error) {
+    if (error.response?.status === 401) {
+      alert('Sessão expirada. Faça login novamente.');
+      secureLocalStorage.removeItem('userData');
+      secureLocalStorage.removeItem('auth_token');
+      window.location.href = '/login';
+    } else {
+      console.error("Erro ao editar talhão:", error);
+    }
+  }
+};
+```
+
+**Código 1 — Correção do bug catastrófico P-01 (edição de talhões)**  
+Problema identificado: URL da requisição PUT não incluía o parâmetro :id, causando incompatibilidade com a definição da rota no backend (router.put('/glebas/:id')). A correção modificou a URL de `axios.put('http://localhost:3000/glebas')` para `axios.put('http://localhost:3000/glebas/${id}')`, alinhando frontend e backend. Adicionalmente, foi implementado tratamento de erro HTTP 401 para gerenciar sessões expiradas.
+
+Resultado: Taxa de sucesso aumentou de 33,3% (Rodada 1) para 100% (Rodada 2).
+
+Fonte: Elaborado pelo autor, 2026.
+
+Adicionalmente, o ícone de três pontos foi substituído por um ícone de lápis sempre visível, resolvendo também o problema P-03.
+
+### Código 2 — Implementação de indicadores de carregamento (P-07)
+
+**P-02 (Alta)**: Os erros HTTP 500 nos gráficos eram causados por três problemas simultâneos no backend: (1) case-sensitivity inconsistente nos nomes de tabelas MySQL (`Safras` vs `safras`), (2) queries que não validavam se o array de glebaIds estava vazio antes de fazer JOIN, gerando SQL inválido, e (3) ausência de blocos try-catch, fazendo com que exceções não tratadas derrubassem a requisição sem log adequado. A Figura 4 mostra o erro antes e o funcionamento após correção.
+
+![Figura 4 — Problema P-02: Erro HTTP 500 na renderização de gráficos](imagens/p02-antes-erro-500-graficos.png.png)
+![Figura 4 (continuação) — Gráficos funcionando após correção](imagens/p02-depois-graficos-funcionando.png.png)
+
+**Figura 4 — Problema P-02: Erro HTTP 500 na renderização de gráficos**  
+(a) Rodada 1: console do navegador exibindo erro HTTP 500 ao tentar carregar gráficos  
+(b) Rodada 2: gráficos renderizam corretamente com dados financeiros reais
+
+Fonte: Elaborado pelo autor, 2026.
+
+Todas as queries foram envolvidas em try-catch e os casos de arrays vazios agora retornam dados vazios ao invés de erro.
+
+**P-03 (Alta)**: A dificuldade de localização do botão de edição foi resolvida substituindo o menu dropdown de três pontos verticais por ícones explícitos. A Figura 5 documenta essa mudança de interface.
+
+![Figura 5 — Problema P-03: Botão de edição difícil de localizar (parte 1)](imagens/p03-antes-botao-tres-pontos-pt1.png.png)
+![Figura 5 — Problema P-03: Botão de edição difícil de localizar (parte 2)](imagens/p03-antes-botao-tres-pontos-pt2.png.png)
+![Figura 5 (continuação) — Ícones claramente visíveis após melhoria](imagens/p03-depois-icones-visiveis.png.png)
+
+**Figura 5 — Problema P-03: Botão de edição difícil de localizar**  
+(a) Rodada 1: ícone de três pontos verticais era pouco intuitivo e difícil de encontrar  
+(b) Rodada 2: ícones de lápis (editar) e lixeira (deletar) explícitos e sempre visíveis
+
+Fonte: Elaborado pelo autor, 2026.
+
+**P-04 (Alta)**: A ausência de botão "Voltar" em formulários forçava usuários a usar o botão do navegador. A Figura 6 mostra a implementação da correção.
+
+![Figura 6 — Problema P-04: Ausência de botão Voltar](imagens/p04-antes-sem-botao-voltar.png.png)
+![Figura 6 (continuação) — Botão Voltar implementado](imagens/p04-depois-com-botao-voltar.png.png)
+
+**Figura 6 — Problema P-04: Ausência de botão "Voltar" em formulários**  
+(a) Rodada 1: formulários sem navegação explícita de retorno  
+(b) Rodada 2: ícone de seta (ArrowBackIcon) adicionado em todos os formulários
+
+Fonte: Elaborado pelo autor, 2026.
+
+**P-07 (Média)**: A ausência de indicadores de carregamento causava percepção de travamento. O Código 2 documenta a implementação da solução.
+
+```javascript
+// ❌ ANTES (Sem feedback visual)
+// Arquivo: frontend/src/scenes/properties/formPage.jsx
+
+const PropertiesForm = () => {
+  const navigate = useNavigate(); 
+
+  const handleFormSubmit = async (values) => {
+    try {
+      // ⚠️ Sem indicação visual de processamento
+      const response = await axios.post("http://localhost:3000/properties", {
+        name: values.namePropertie,
+        area: values.area,          
+        city: values.city,          
+        email: userData.email
+      }, {
+        headers: {Authorization: `Bearer ${token}`}
+      });
+   
+      if (response.status === 201) {
+        navigate(`/propriedades?message=${encodeURIComponent("1")}`);
+      }
+    } catch (error) {
+      console.error("Erro ao criar propriedade:", error);
+    }
+  };
+
+  return (
+    <Box m="20px">
+      <Header title="Adicionar Propriedade" />
+      <Formik onSubmit={handleFormSubmit}>
+        {/* Formulário sem indicador de loading */}
+      </Formik>
+    </Box>
+  );
+};
+
+// ✅ DEPOIS (Com feedback visual de carregamento)
+// Arquivo: frontend/src/scenes/properties/formPage.jsx
+
+import { CircularProgress } from "@mui/material";
+
+const PropertiesForm = () => {
+  const navigate = useNavigate(); 
+  const [isSubmitting, setIsSubmitting] = useState(false);  // ✅ Estado de loading
+
+  const handleFormSubmit = async (values) => {
+    setIsSubmitting(true);  // ✅ Ativa indicador visual
+    try {
+      const response = await axios.post("http://localhost:3000/properties", {
+        name: values.namePropertie,
+        area: values.area,          
+        city: values.city,          
+        email: userData.email
+      }, {
+        headers: {Authorization: `Bearer ${token}`}
+      });
+   
+      if (response.status === 201) {
+        await new Promise(resolve => setTimeout(resolve, 800));
+        navigate(`/propriedades?message=${encodeURIComponent("1")}`);
+      }
+    } catch (error) {
+      if (error.response?.status === 401) {
+        alert('Sessão expirada. Faça login novamente.');
+        secureLocalStorage.removeItem('userData');
+        secureLocalStorage.removeItem('auth_token');
+        window.location.href = '/login';
+      } else {
+        console.error("Erro ao criar propriedade:", error);
+      }
+    } finally {
+      setIsSubmitting(false);  // ✅ Desativa indicador após resposta
+    }
+  };
+
+  return (
+    <Box m="20px">
+      <Header title="Adicionar Propriedade" />
+      <Formik onSubmit={handleFormSubmit}>
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            {/* Formulário */}
+            <Box mt="20px">
+              <Button 
+                type="submit" 
+                color="secondary" 
+                variant="contained"
+                disabled={isSubmitting}  // ✅ Desabilita durante envio
+              >
+                {isSubmitting ? (
+                  <>
+                    <CircularProgress size={20} sx={{ mr: 1 }} />
+                    Salvando...
+                  </>
+                ) : (
+                  "Salvar Propriedade"
+                )}
+              </Button>
+            </Box>
+          </form>
+        )}
+      </Formik>
+    </Box>
+  );
+};
+```
+
+**Código 2 — Implementação de indicadores de carregamento (P-07)**  
+Adiciona estado `isSubmitting` controlado por useState para rastrear o status de submissão. Durante requisições assíncronas, exibe componente CircularProgress (Material UI) e desabilita o botão para prevenir múltiplos cliques. O bloco `finally` garante que o indicador seja desativado independentemente de sucesso ou erro.
+
+Efeito: Elimina percepção de travamento reportada por 50% dos participantes na Rodada 1.
+
+Fonte: Elaborado pelo autor, 2026.
+
+A Figura 7 ilustra visualmente o indicador de carregamento em ação.
+
+![Figura 7 — Problema P-07: Ausência de indicador de carregamento](imagens/p07-antes-sem-loading.png.png)
+![Figura 7 (continuação) — CircularProgress implementado](imagens/p07-depois-com-loading.png.png)
+
+**Figura 7 — Problema P-07: Ausência de indicador de carregamento**  
+(a) Rodada 1: formulário sem feedback visual durante processamento  
+(b) Rodada 2: spinner circular (CircularProgress) indica processamento em andamento
+
+Fonte: Elaborado pelo autor, 2026.
+
+### Código 3 — Configuração de CORS e porta dinâmica para deploy
+
+Para viabilizar o deploy em ambiente de produção, foi implementada configuração dinâmica de CORS e porta no backend:
+
+```javascript
+// ❌ ANTES (Configuração hardcoded - impossibilita deploy)
+// Arquivo: backend/index.js
+
+const express = require("express");
+const cors = require('cors');
+const app = express();
+
+// ⚠️ URL hardcoded - não funciona em produção
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
+const port = 3000;  // ⚠️ Porta fixa
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
+
+// ✅ DEPOIS (Configuração adaptativa para dev e produção)
+// Arquivo: backend/index.js
+
+const express = require("express");
+const cors = require('cors');
+require('dotenv').config();
+const app = express();
+
+// ✅ CORS dinâmico: desenvolvimento vs produção
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? [process.env.CORS_ORIGIN]  // ✅ URL de produção via variável de ambiente
+    : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
+// ✅ Porta dinâmica (Heroku, Railway, Render)
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
+```
+
+**Código 3 — Configuração de CORS e porta dinâmica para deploy**  
+Utiliza variáveis de ambiente (dotenv) para configuração adaptativa entre desenvolvimento e produção. Em desenvolvimento, permite múltiplas origens localhost para testes. Em produção, lê a origem permitida de `process.env.CORS_ORIGIN`. A porta é definida dinamicamente via `process.env.PORT` para compatibilidade com plataformas de hospedagem (Vercel, Railway, Render).
+
+Benefício: Permite deploy sem modificação manual do código-fonte.
+
+Fonte: Elaborado pelo autor, 2026.
 
 Todas as alterações foram documentadas e versionadas através de **47 commits** no repositório Git do projeto entre 20/05 e 10/06, com mensagens descritivas seguindo o padrão "fix(scope): descrição do problema resolvido". O código modificado foi submetido a testes automatizados de build (Vite para frontend, npm para backend) antes da implantação nas plataformas de produção: Vercel (frontend), Render (backend) e Aiven (MySQL).
 
