@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, useTheme, Button, useMediaQuery,Snackbar, Alert,Tooltip,IconButton } from "@mui/material";
+import { Box, Typography, useTheme, Button, useMediaQuery,Snackbar, Alert,Tooltip,IconButton, CircularProgress } from "@mui/material";
 import { useNavigate,useLocation,useParams } from 'react-router-dom';
 import { DataGrid,GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector } from '@mui/x-data-grid';
 import { tokens } from "../../theme";
@@ -21,6 +21,7 @@ const Properties = () => {
     const isSmallDivice = useMediaQuery("(max-width: 1300px)");
     const [propriedades, setPropriedades] = useState([]);
     const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const message = Number(query.get('message'));
@@ -139,12 +140,13 @@ const Properties = () => {
         if (token) { 
             const fetchPropriedadesData = async () => {
                 try {
+                    setLoading(true);
                     const response = await axios.get(`/user`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     });
-                    setPropriedades(response.data); 
+                    setPropriedades(response.data);
                 } catch (error) {
                     if (error.response?.status === 401) {
                         alert('Sessão expirada. Faça login novamente.');
@@ -154,6 +156,8 @@ const Properties = () => {
                     } else {
                         console.log("ERRO - ao buscar as propriedades." + error);
                     }
+                } finally {
+                    setLoading(false);
                 }
             };
             fetchPropriedadesData();
@@ -224,7 +228,21 @@ const Properties = () => {
                     },
                 }}>
 
-                    {propriedades.length === 0 ? (
+                    {loading ? (
+                        <Box
+                            display="flex"
+                            flexDirection="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            gap="20px"
+                            mt="50px"
+                        >
+                            <CircularProgress size={60} sx={{ color: colors.mygreen[400] }} />
+                            <Typography variant={isMobile ? "h6" : "h5"} fontWeight="bold" color={colors.grey[100]}>
+                                Carregando propriedades...
+                            </Typography>
+                        </Box>
+                    ) : propriedades.length === 0 ? (
                         <Box
                             display="flex"
                             flexDirection= "column"
