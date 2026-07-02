@@ -1168,7 +1168,12 @@ A redução de 27,6% no tempo médio de execução das tarefas (de 127s para 92s
 3. Indicadores de carregamento (P-07), eliminando a percepção de travamento e cliques redundantes
 4. Tradução completa para português (P-06), reduzindo tempo de interpretação
 
-Destaca-se a tarefa T5 (Gerar Gráfico), que apresentou a maior redução de tempo em termos percentuais (−42,1%, de 38s para 22s), evidenciando que a correção do erro HTTP 500 não apenas tornou a funcionalidade operacional, mas também mais eficiente.
+Destaca-se a tarefa T5 (Gerar Gráfico), que apresentou a maior redução de tempo em termos percentuais (−42,1%, de 38s para 22s), evidenciando que a correção do erro HTTP 500 não apenas tornou a funcionalidade operacional, mas também mais eficiente. A Figura 1 ilustra graficamente essa comparação por tarefa.
+
+![Figura 1 — Comparação de tempo médio por tarefa (Rodada 1 vs. Rodada 2)](imagens/grafico-tempo-medio-tarefas.png)
+
+**Figura 1 — Comparação de tempo médio por tarefa (Rodada 1 vs. Rodada 2)**  
+Fonte: Elaborado pelo autor, 2026.
 
 **Efetividade (Taxa de Sucesso):**
 
@@ -1189,7 +1194,12 @@ A evolução do NPS de −83,3 (rejeição crítica) para +33,3 (boa aceitação
 - **Rodada 1**: Posicionava-se na "zona de perigo" com 83,3% de usuários detratores ativos que provavelmente desencorajariam outros de usar o sistema
 - **Rodada 2**: Posiciona-se na "zona de qualidade" com 50% de promotores (usuários que recomendariam ativamente o sistema) e apenas 16,7% de detratores
 
-É particularmente notável que o participante P5 (Antônio, técnico), que havia atribuído a nota mais baixa na Rodada 1 (2/10), tenha elevado sua avaliação para 8/10 na Rodada 2, verbalizando reconhecimento explícito das melhorias estruturais implementadas: *"Carregamentos satisfatórios agora, feedback para o usuário sobre o que está acontecendo ficou muito bom, correção de layout notada"*.
+É particularmente notável que o participante P5 (Antônio, técnico), que havia atribuído a nota mais baixa na Rodada 1 (2/10), tenha elevado sua avaliação para 8/10 na Rodada 2, verbalizando reconhecimento explícito das melhorias estruturais implementadas: *"Carregamentos satisfatórios agora, feedback para o usuário sobre o que está acontecendo ficou muito bom, correção de layout notada"*. A Figura 2 ilustra a evolução do NPS e a distribuição de classificação dos participantes entre as rodadas.
+
+![Figura 2 — Evolução do Net Promoter Score (NPS)](imagens/grafico-evolucao-nps.png)
+
+**Figura 2 — Evolução do Net Promoter Score (NPS)**  
+Fonte: Elaborado pelo autor, 2026.
 
 ### 6.5.2. Análise Qualitativa das Verbalizações
 

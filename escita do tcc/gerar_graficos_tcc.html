@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gráficos TCC Smart Plantio</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 24px; }
+    h1   { font-size: 16px; color: #333; }
+    .bloco { background: white; border: 1px solid #ddd; border-radius: 8px;
+             padding: 20px; margin-bottom: 32px; max-width: 860px; }
+    canvas { display: block; margin: 0 auto; }
+    button { margin-top: 14px; padding: 8px 20px; background: #0072B2;
+             color: white; border: none; border-radius: 4px; cursor: pointer;
+             font-size: 14px; }
+    button:hover { background: #005a8e; }
+  </style>
+</head>
+<body>
+
+<h1>TCC Smart Plantio — Gráficos para a seção 6.5 (Análise Comparativa)</h1>
+<p style="font-size:13px;color:#555">Clique em <b>Baixar PNG</b> em cada gráfico para salvar na pasta <code>imagens/</code></p>
+
+<!-- ─── FIGURA 1 ──────────────────────────────────────────────────────────── -->
+<div class="bloco">
+  <h2 style="font-size:13px;text-align:center;margin-bottom:16px">
+    Figura 1 — Comparação de tempo médio por tarefa (Rodada 1 vs. Rodada 2)
+  </h2>
+  <canvas id="chart1" width="820" height="420"></canvas>
+  <br>
+  <button onclick="baixar('chart1','grafico-tempo-medio-tarefas')">⬇ Baixar PNG — grafico-tempo-medio-tarefas.png</button>
+</div>
+
+<!-- ─── FIGURA 2 ──────────────────────────────────────────────────────────── -->
+<div class="bloco">
+  <h2 style="font-size:13px;text-align:center;margin-bottom:16px">
+    Figura 2 — Evolução do Net Promoter Score (NPS)
+  </h2>
+  <canvas id="chart2" width="820" height="440"></canvas>
+  <br>
+  <button onclick="baixar('chart2','grafico-evolucao-nps')">⬇ Baixar PNG — grafico-evolucao-nps.png</button>
+</div>
+
+<script>
+// ── DADOS (Tabelas 3, 7 e 9 da monografia) ────────────────────────────────
+const tarefas   = ['T1 Propriedade','T2 Talhão','T3 Safra','T4 Custo','T5 Gráficos','T6 Estoque'];
+const r1_tempo  = [103, 130, 176, 191, 38, 125];
+const r2_tempo  = [ 86,  98, 128, 125, 22,  93];
+
+// ── FIGURA 1 — barras agrupadas ───────────────────────────────────────────
+Chart.defaults.font.family = 'Arial';
+
+new Chart(document.getElementById('chart1'), {
+  type: 'bar',
+  data: {
+    labels: tarefas,
+    datasets: [
+      {
+        label: 'Rodada 1 — pré-correção (s)',
+        data: r1_tempo,
+        backgroundColor: '#D55E00',
+        borderColor: '#D55E00',
+        borderWidth: 1,
+      },
+      {
+        label: 'Rodada 2 — pós-correção (s)',
+        data: r2_tempo,
+        backgroundColor: '#0072B2',
+        borderColor: '#0072B2',
+        borderWidth: 1,
+      }
+    ]
+  },
+  options: {
+    responsive: false,
+    plugins: {
+      legend: { position: 'top', labels: { font: { size: 12 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}s`
+        }
+      },
+      // anotações manuais via datalabels-like via afterDraw
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: {
+        beginAtZero: true,
+        max: 230,
+        title: { display: true, text: 'Tempo médio (segundos)', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.07)' }
+      }
+    },
+    animation: false
+  },
+  plugins: [{
+    // rótulos de valor no topo das barras
+    afterDatasetsDraw(chart) {
+      const ctx = chart.ctx;
+      ctx.font = 'bold 11px Arial';
+      ctx.textAlign = 'center';
+      chart.data.datasets.forEach((ds, di) => {
+        const meta = chart.getDatasetMeta(di);
+        meta.data.forEach((bar, i) => {
+          const v = ds.data[i];
+          ctx.fillStyle = di === 0 ? '#D55E00' : '#0072B2';
+          ctx.fillText(v + 's', bar.x, bar.y - 5);
+        });
+      });
+    }
+  }]
+});
+
+// ── FIGURA 2 — NPS + distribuição lado a lado ────────────────────────────
+// Distribuição:
+//   R1: Promotores 0%, Neutros 16.7%, Detratores 83.3%
+//   R2: Promotores 50%, Neutros 33.3%, Detratores 16.7%
+new Chart(document.getElementById('chart2'), {
+  type: 'bar',
+  data: {
+    labels: ['Rodada 1\n(NPS = −83,3)', 'Rodada 2\n(NPS = +33,3)'],
+    datasets: [
+      {
+        label: 'Detratores (0–6)',
+        data: [83.3, 16.7],
+        backgroundColor: '#CC3311',
+        stack: 'dist',
+        order: 2
+      },
+      {
+        label: 'Neutros (7–8)',
+        data: [16.7, 33.3],
+        backgroundColor: '#DDAA33',
+        stack: 'dist',
+        order: 2
+      },
+      {
+        label: 'Promotores (9–10)',
+        data: [0.0, 50.0],
+        backgroundColor: '#009E73',
+        stack: 'dist',
+        order: 2
+      },
+      {
+        // linha de NPS (eixo Y2)
+        type: 'line',
+        label: 'NPS',
+        data: [-83.3, 33.3],
+        backgroundColor: 'rgba(80,80,80,0.15)',
+        borderColor: '#333',
+        borderWidth: 2.5,
+        pointRadius: 8,
+        pointBackgroundColor: ['#CC3311','#009E73'],
+        pointBorderColor: 'white',
+        pointBorderWidth: 2,
+        yAxisID: 'y2',
+        stack: undefined,
+        order: 1,
+        tension: 0.3,
+        fill: true
+      }
+    ]
+  },
+  options: {
+    responsive: false,
+    plugins: {
+      legend: { position: 'top', labels: { font: { size: 11 } } },
+      tooltip: { mode: 'index', intersect: false }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+      y: {
+        stacked: true,
+        max: 115,
+        min: 0,
+        title: { display: true, text: 'Participantes (%)', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.07)' }
+      },
+      y2: {
+        position: 'right',
+        min: -110,
+        max: 80,
+        title: { display: true, text: 'NPS', font: { size: 12 } },
+        grid: { drawOnChartArea: false },
+        ticks: {
+          callback: v => (v >= 0 ? '+' : '') + v
+        }
+      }
+    },
+    animation: false
+  },
+  plugins: [{
+    afterDatasetsDraw(chart) {
+      const ctx = chart.ctx;
+      // percentuais nas barras empilhadas
+      const distribDatasets = [0, 1, 2]; // Detratores, Neutros, Promotores
+      distribDatasets.forEach(di => {
+        const ds  = chart.data.datasets[di];
+        const meta = chart.getDatasetMeta(di);
+        meta.data.forEach((bar, i) => {
+          const v = ds.data[i];
+          if (v < 5) return;
+          ctx.font = 'bold 12px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = 'white';
+          ctx.fillText(v.toFixed(1) + '%', bar.x, bar.y + bar.height / 2 + 5);
+        });
+      });
+      // rótulos do NPS na linha
+      const npsVals = [-83.3, 33.3];
+      const colors  = ['#CC3311','#009E73'];
+      const metaNPS = chart.getDatasetMeta(3);
+      metaNPS.data.forEach((pt, i) => {
+        const v = npsVals[i];
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = colors[i];
+        const label = (v >= 0 ? '+' : '') + v.toFixed(1);
+        ctx.fillText(label, pt.x, pt.y - 14);
+      });
+    }
+  }]
+});
+
+// ── Download ──────────────────────────────────────────────────────────────
+function baixar(canvasId, nome) {
+  const canvas = document.getElementById(canvasId);
+  const link   = document.createElement('a');
+  link.download = nome + '.png';
+  link.href     = canvas.toDataURL('image/png');
+  link.click();
+}
+</script>
+</body>
+</html>
