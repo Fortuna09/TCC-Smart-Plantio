@@ -26,7 +26,7 @@
 
 ## RESUMO
 
-A agricultura brasileira enfrenta um abismo tecnológico significativo entre grandes corporações do agronegócio e pequenos produtores rurais. Segundo o Censo Agropecuário de 2017, mais de 77% dos estabelecimentos rurais brasileiros são classificados como agricultura familiar, segmento historicamente subatendido por ferramentas digitais de gestão. O Smart Plantio, desenvolvido originalmente por Lage (2025), é uma plataforma web projetada para auxiliar a gestão de propriedades rurais de pequeno porte, centralizando informações financeiras, de safras e de custos em uma interface digital acessível. Este trabalho de conclusão de curso teve como objetivo avaliar a usabilidade dessa plataforma através de uma metodologia científica rigorosa, fundamentada nos princípios da área de Interação Humano-Computador (IHC). Para tanto, foi estruturado um processo experimental em duas rodadas de testes de usabilidade com seis participantes de perfis distintos (leigos, agricultores e técnicos), aplicando-se o protocolo Think-Aloud para captura de verbalizações e o registro sistemático de métricas de efetividade, eficiência e satisfação conforme estabelecido pela norma ISO/IEC 9241-11. A primeira rodada de testes, realizada em maio de 2026, identificou onze problemas críticos de usabilidade, incluindo falhas funcionais catastróficas que impediam a conclusão de tarefas essenciais, resultando em um Net Promoter Score (NPS) de −83,3 pontos. Com base nesses achados, foram implementadas intervenções técnicas priorizadas segundo a escala de severidade de Nielsen, envolvendo correções no backend (Node.js/Express), frontend (React/Material UI) e na arquitetura de dados (MySQL/Sequelize), totalizando 47 commits documentados. A segunda rodada de testes, conduzida em junho de 2026 com os mesmos participantes, validou empiricamente a eficácia das melhorias implementadas: o NPS evoluiu para +33,3 (melhoria de 116,6 pontos percentuais), o tempo médio por tarefa reduziu 27,6%, a taxa de sucesso alcançou 100%, os erros diminuíram 87,5%, e a satisfação aumentou 67,9%. Os resultados evidenciam a importância crítica da validação empírica com usuários reais para a detecção de barreiras de usabilidade que não seriam identificadas em testes puramente técnicos, contribuindo para a literatura de IHC aplicada a sistemas de gestão agrícola e demonstrando que investimento direcionado em usabilidade produz retornos mensuráveis e substanciais na aceitação do usuário.
+A agricultura brasileira enfrenta um abismo tecnológico significativo entre grandes corporações do agronegócio e pequenos produtores rurais. Segundo o Censo Agropecuário de 2017, mais de 77% dos estabelecimentos rurais brasileiros são classificados como agricultura familiar, segmento historicamente subatendido por ferramentas digitais de gestão. O Smart Plantio é uma plataforma web projetada para auxiliar a gestão de propriedades rurais de pequeno porte, centralizando informações financeiras, de safras e de custos em uma interface digital acessível. Este trabalho de conclusão de curso teve como objetivo avaliar a usabilidade dessa plataforma através de uma metodologia científica rigorosa, fundamentada nos princípios da área de Interação Humano-Computador (IHC). Para tanto, foi estruturado um processo experimental em duas rodadas de testes de usabilidade com seis participantes de perfis distintos (leigos, agricultores e técnicos), aplicando-se o protocolo Think-Aloud para captura de verbalizações e o registro sistemático de métricas de efetividade, eficiência e satisfação conforme estabelecido pela norma ISO/IEC 9241-11. A primeira rodada de testes, realizada em maio de 2026, identificou onze problemas críticos de usabilidade, incluindo falhas funcionais catastróficas que impediam a conclusão de tarefas essenciais, resultando em um Net Promoter Score (NPS) de −83,3 pontos. Com base nesses achados, foram implementadas intervenções técnicas priorizadas segundo a escala de severidade de Nielsen, envolvendo correções no backend (Node.js/Express), frontend (React/Material UI) e na arquitetura de dados (MySQL/Sequelize), totalizando 47 commits documentados. A segunda rodada de testes, conduzida em junho de 2026 com os mesmos participantes, validou empiricamente a eficácia das melhorias implementadas: o NPS evoluiu para +33,3 (melhoria de 116,6 pontos percentuais), o tempo médio por tarefa reduziu 27,6%, a taxa de sucesso alcançou 100%, os erros diminuíram 87,5%, e a satisfação aumentou 67,9%. Os resultados evidenciam a importância crítica da validação empírica com usuários reais para a detecção de barreiras de usabilidade que não seriam identificadas em testes puramente técnicos, contribuindo para a literatura de IHC aplicada a sistemas de gestão agrícola e demonstrando que investimento direcionado em usabilidade produz retornos mensuráveis e substanciais na aceitação do usuário.
 
 **Palavras-chave:** Usabilidade. Interação Humano-Computador. Gestão Agrícola. Agricultura Familiar. Testes com Usuários.
 
@@ -34,7 +34,7 @@ A agricultura brasileira enfrenta um abismo tecnológico significativo entre gra
 
 ## ABSTRACT
 
-Brazilian agriculture faces a significant technological gap between large agribusiness corporations and small rural producers. According to the 2017 Agricultural Census, more than 77% of Brazilian rural establishments are classified as family farming, a segment historically underserved by digital management tools. Smart Plantio, originally developed by Lage (2025), is a web platform designed to assist the management of small-scale rural properties by centralizing financial, crop, and cost information in an accessible digital interface. This undergraduate thesis aimed to evaluate the usability of this platform through a rigorous scientific methodology grounded in the principles of Human-Computer Interaction (HCI). To this end, an experimental process was structured in two rounds of usability testing with six participants from different profiles (laypeople, farmers, and technical users), applying the Think-Aloud protocol to capture verbalizations and the systematic recording of effectiveness, efficiency, and satisfaction metrics as established by the ISO/IEC 9241-11 standard. The first round of tests, conducted in May 2026, identified eleven critical usability problems, including catastrophic functional failures that prevented the completion of essential tasks, resulting in a Net Promoter Score (NPS) of −83.3 points. Based on these findings, technical interventions were implemented prioritized according to Nielsen's severity scale, involving corrections in the backend (Node.js/Express), frontend (React/Material UI), and data architecture (MySQL/Sequelize), totaling 47 documented commits. The second round of testing, conducted in June 2026 with the same participants, empirically validated the effectiveness of the implemented improvements: the NPS evolved to +33.3 (improvement of 116.6 percentage points), average time per task was reduced by 27.6%, success rate reached 100%, errors decreased by 87.5%, and satisfaction increased by 67.9%. The results highlight the critical importance of empirical validation with real users for detecting usability barriers that would not be identified in purely technical tests, contributing to the HCI literature applied to agricultural management systems and demonstrating that targeted investment in usability produces measurable and substantial returns in user acceptance.
+Brazilian agriculture faces a significant technological gap between large agribusiness corporations and small rural producers. According to the 2017 Agricultural Census, more than 77% of Brazilian rural establishments are classified as family farming, a segment historically underserved by digital management tools. Smart Plantio is a web platform designed to assist the management of small-scale rural properties by centralizing financial, crop, and cost information in an accessible digital interface. This undergraduate thesis aimed to evaluate the usability of this platform through a rigorous scientific methodology grounded in the principles of Human-Computer Interaction (HCI). To this end, an experimental process was structured in two rounds of usability testing with six participants from different profiles (laypeople, farmers, and technical users), applying the Think-Aloud protocol to capture verbalizations and the systematic recording of effectiveness, efficiency, and satisfaction metrics as established by the ISO/IEC 9241-11 standard. The first round of tests, conducted in May 2026, identified eleven critical usability problems, including catastrophic functional failures that prevented the completion of essential tasks, resulting in a Net Promoter Score (NPS) of −83.3 points. Based on these findings, technical interventions were implemented prioritized according to Nielsen's severity scale, involving corrections in the backend (Node.js/Express), frontend (React/Material UI), and data architecture (MySQL/Sequelize), totaling 47 documented commits. The second round of testing, conducted in June 2026 with the same participants, empirically validated the effectiveness of the implemented improvements: the NPS evolved to +33.3 (improvement of 116.6 percentage points), average time per task was reduced by 27.6%, success rate reached 100%, errors decreased by 87.5%, and satisfaction increased by 67.9%. The results highlight the critical importance of empirical validation with real users for detecting usability barriers that would not be identified in purely technical tests, contributing to the HCI literature applied to agricultural management systems and demonstrating that targeted investment in usability produces measurable and substantial returns in user acceptance.
 
 **Keywords:** Usability. Human-Computer Interaction. Agricultural Management. Family Farming. User Testing.
 
@@ -128,13 +128,13 @@ A gestão de uma propriedade rural, independentemente de seu porte, envolve uma 
 
 Essa falta de estruturação adequada dos dados produtivos e financeiros impede que o produtor tome decisões estratégicas fundamentadas em informações concretas e confiáveis. Questões essenciais para a gestão do negócio agrícola, como identificar o momento ideal para a compra antecipada de insumos visando aproveitar oportunidades de preços mais baixos, determinar quais culturas oferecem o melhor retorno sobre o investimento (ROI) em cada ciclo produtivo, calcular com precisão o custo unitário de produção por hectare ou por tonelada colhida, e planejar adequadamente o fluxo de caixa para evitar descasamentos financeiros, ficam prejudicadas pela ausência de um sistema organizado de registro e análise de dados (EMBRAPA, 2018; SEBRAE, 2020).
 
-Neste cenário de necessidades tecnológicas crescentes e recursos limitados, o sistema **Smart Plantio** apresenta-se como uma solução promissora e acessível. Desenvolvido originalmente por Lage (2025) como trabalho de conclusão de curso na Universidade Federal de Alfenas (UNIFAL), o Smart Plantio é uma plataforma web de gestão agrícola especificamente projetada para atender às demandas e limitações do pequeno produtor rural brasileiro. O sistema foi concebido com o objetivo central de transformar o cotidiano operacional do produtor em um processo orientado por dados, fornecendo ferramentas digitais que centralizam todas as etapas da produção agrícola, desde o mapeamento inicial das propriedades e a divisão em talhões produtivos até a análise financeira detalhada através de painéis visuais de indicadores (dashboards) intuitivos (LAGE, 2025).
+Neste cenário de necessidades tecnológicas crescentes e recursos limitados, o sistema **Smart Plantio** apresenta-se como uma solução promissora e acessível. Desenvolvido originalmente por Renan Magalhães Lage como trabalho de conclusão de curso na Universidade Federal de Alfenas (UNIFAL) em 2025, sob orientação do Prof. Dr. Paulo Alexandre Bressan, o Smart Plantio é uma plataforma web de gestão agrícola especificamente projetada para atender às demandas e limitações do pequeno produtor rural brasileiro (LAGE, 2025). O trabalho de Lage concentrou-se no desenvolvimento técnico completo da plataforma, incluindo a concepção da arquitetura de software, a implementação das funcionalidades de gestão de propriedades rurais, o desenvolvimento das interfaces de usuário, a integração com banco de dados, e a implantação (deployment) da aplicação em ambiente de produção. O sistema foi concebido com o objetivo central de transformar o cotidiano operacional do produtor em um processo orientado por dados, fornecendo ferramentas digitais que centralizam todas as etapas da produção agrícola, desde o mapeamento inicial das propriedades e a divisão em talhões produtivos até a análise financeira detalhada através de painéis visuais de indicadores (dashboards) intuitivos.
 
 A proposta fundamental do Smart Plantio é fornecer ao usuário uma visão simultaneamente macro e micro do seu negócio agrícola, permitindo que ele visualize de forma clara, objetiva e intuitiva tanto a saúde financeira global de sua produção quanto os detalhes operacionais de cada safra individual. Para isso, o sistema oferece funcionalidades integradas de cadastro de propriedades e talhões, registro de safras com informações sobre culturas, datas de plantio e colheita, lançamento detalhado de custos classificados por categorias (insumos, mão de obra, maquinário, etc.), controle de estoque de insumos com alertas de níveis mínimos, e geração automática de relatórios e gráficos financeiros que sintetizam informações complexas em visualizações acessíveis (LAGE, 2025).
 
 A arquitetura técnica do Smart Plantio fundamenta-se em tecnologias web modernas e consolidadas no mercado de desenvolvimento de software. O backend da aplicação utiliza o ambiente de execução Node.js combinado com o framework minimalista Express, proporcionando uma camada de serviços REST (Representational State Transfer) eficiente e escalável para a comunicação com o frontend. O frontend, por sua vez, foi desenvolvido utilizando a biblioteca React, que permite a construção de interfaces de usuário reativas e componentizadas, aliada à ferramenta de build Vite para otimização do processo de desenvolvimento e empacotamento final. A camada de persistência de dados utiliza o sistema gerenciador de banco de dados relacional MySQL, integrado ao backend através do ORM (Object-Relational Mapping) Sequelize, que facilita a manipulação de dados e garante a segurança contra vulnerabilidades como SQL Injection (LAGE, 2025).
 
-Este trabalho de conclusão de curso, também vinculado à Universidade Federal de Alfenas (UNIFAL) e orientado pelo mesmo professor que orientou o desenvolvimento original do sistema (Prof. Dr. Paulo Alexandre Bressan), parte da plataforma Smart Plantio já existente e operacional, mas propõe um foco diferenciado e complementar ao trabalho original de Lage (2025). Enquanto o trabalho de Lage concentrou-se no desenvolvimento técnico do sistema, na implementação de funcionalidades e na arquitetura de software, o presente trabalho dedica-se especificamente à avaliação científica e rigorosa da **usabilidade** da plataforma, reconhecendo que a facilidade de uso e a qualidade da experiência do usuário (User Experience - UX) são tão importantes quanto a solidez técnica e funcional do sistema, especialmente quando o público-alvo possui características específicas como diferentes níveis de letramento digital (CYBIS; BETIOL; FAUST, 2015; NIELSEN, 1993).
+Este trabalho de conclusão de curso, também vinculado à Universidade Federal de Alfenas (UNIFAL) e orientado pelo mesmo professor (Prof. Dr. Paulo Alexandre Bressan), parte da plataforma Smart Plantio já existente e operacional, mas propõe um foco diferenciado e complementar ao trabalho de Lage. Enquanto o TCC de Lage abordou os aspectos técnicos de desenvolvimento, o presente trabalho dedica-se especificamente à avaliação científica e rigorosa da **usabilidade** da plataforma, reconhecendo que a facilidade de uso e a qualidade da experiência do usuário (User Experience - UX) são tão importantes quanto a solidez técnica e funcional do sistema, especialmente quando o público-alvo possui características específicas como diferentes níveis de letramento digital (CYBIS; BETIOL; FAUST, 2015; NIELSEN, 1993).
 
 A abordagem metodológica adotada neste trabalho fundamenta-se nos princípios consolidados da área de Interação Humano-Computador (IHC), que estabelece que a qualidade de um sistema interativo deve ser avaliada não apenas por métricas técnicas de performance ou pela completude de suas funcionalidades, mas principalmente pela capacidade do sistema de permitir que seus usuários reais atinjam seus objetivos de forma efetiva (completando as tarefas com sucesso), eficiente (com o mínimo de esforço e tempo) e satisfatória (com conforto e percepção positiva), conforme estabelecido pela norma internacional ISO/IEC 9241-11 (ISO/IEC, 2018).
 
@@ -224,21 +224,139 @@ A fragmentação dos dados produtivos e financeiros é identificada como um prob
 
 A adoção de sistemas de gestão do tipo ERP (Enterprise Resource Planning) simplificados e adaptados à realidade do campo permite que esses dados sejam centralizados em uma única plataforma digital, transformando registros brutos e desconexos em indicadores de desempenho (KPIs - Key Performance Indicators) que auxiliam na tomada de decisões estratégicas. Esses indicadores incluem métricas como custo médio por hectare, rentabilidade por cultura, retorno sobre investimento (ROI), ponto de equilíbrio financeiro, e projeções de fluxo de caixa para os próximos ciclos produtivos. Essas informações são essenciais para a sustentabilidade do negócio agrícola e para a segurança alimentar das famílias rurais a longo prazo (EMBRAPA, 2018; SEBRAE, 2020).
 
-## 4.2. O Sistema Smart Plantio
+## 4.2. Softwares de Gestão Agrícola no Mercado Brasileiro
 
-Esta seção apresenta o sistema Smart Plantio em seus aspectos históricos, funcionais e arquiteturais, contextualizando o desenvolvimento original da plataforma e detalhando as tecnologias empregadas em sua construção.
+O mercado brasileiro de tecnologia para o agronegócio tem apresentado crescimento significativo nos últimos anos, com o surgimento e consolidação de diversas plataformas digitais voltadas à gestão de propriedades rurais. Essas soluções variam amplamente em termos de público-alvo, funcionalidades oferecidas, modelo de precificação e complexidade de uso. Esta seção apresenta uma análise comparativa dos principais softwares disponíveis no mercado brasileiro, contextualizando o Smart Plantio dentro desse ecossistema tecnológico.
 
-### 4.2.1. Histórico e Desenvolvimento Original
+### 4.2.1. Panorama Geral de Soluções Existentes
 
-O sistema Smart Plantio foi originalmente concebido e desenvolvido por Renan Magalhães Lage como trabalho de conclusão do curso de Bacharelado em Ciência da Computação pela Universidade Federal de Alfenas (UNIFAL), sob orientação do Prof. Dr. Paulo Alexandre Bressan, tendo sido apresentado e aprovado em 14 de julho de 2025 (LAGE, 2025). O trabalho de Lage foi intitulado "SmartPlantio: Sistema de Gestão de Safras para Pequenos Produtores" e teve como foco principal o desenvolvimento técnico completo da plataforma, incluindo a concepção da arquitetura de software, a implementação das funcionalidades de gestão de propriedades rurais, o desenvolvimento das interfaces de usuário, a integração com banco de dados, e a implantação (deployment) da aplicação em ambiente de produção.
+A revisão do mercado identificou dez plataformas representativas que atendem diferentes segmentos da agricultura brasileira, desde grandes corporações do agronegócio até pequenos produtores familiares. Essas soluções compartilham objetivos gerais de digitalização e organização de dados produtivos, mas diferem significativamente em suas propostas de valor, modelos de negócio e públicos-alvo.
 
-Segundo Lage (2025), a motivação central para o desenvolvimento do Smart Plantio surgiu da observação de que, embora existissem no mercado algumas soluções voltadas à gestão de propriedades rurais, muitas delas apresentavam características que as tornavam inadequadas ou inacessíveis ao público-alvo da agricultura familiar e de pequeno porte. Essas limitações incluíam: (a) excesso de funcionalidades complexas e desnecessárias para o pequeno produtor, tornando a curva de aprendizado muito íngreme; (b) custos elevados de assinatura mensal ou anual, incompatíveis com o orçamento reduzido típico das pequenas propriedades; (c) interfaces de usuário confusas, sobrecarregadas e pouco intuitivas; e (d) ausência de foco específico nos aspectos de controle financeiro e de custos, que são as necessidades mais urgentes do pequeno produtor.
+**1. Aegro** (https://www.aegro.com.br)  
+**Objetivo:** Sistema completo de gestão agrícola integrado, focado em médios e grandes produtores, com forte ênfase em gestão financeira e fiscal.  
+**Características principais:** Emissão gratuita de NF-e e MDF-e diretamente integrada à SEFAZ; gestão financeira completa com fluxo de caixa e controle de custos por área e cultura; aplicativo móvel (Aegro Campo) que funciona offline para registro de tarefas e monitoramento de pragas; integração automatizada com sistemas contábeis e Livro Caixa Digital do Produtor Rural (LCDPR); módulo de pecuária para gestão de rebanhos; comparador de preços de insumos baseado em dados regionais; suporte técnico especializado e treinamento personalizado.  
+**Modelo de precificação:** Assinatura mensal ou anual com planos diferenciados por tamanho de propriedade; emissão de NF-e gratuita como estratégia de aquisição de clientes.  
+**Diferenciais:** Interface profissional desenvolvida com participação ativa de produtores rurais; forte presença no mercado brasileiro com mais de 4 milhões de hectares gerenciados; cases de sucesso documentados mostrando aumento de margem de lucro superior a 15% em propriedades que adotaram o sistema.
 
-Diante desse cenário, Lage (2025) propôs o desenvolvimento de um ambiente digital dedicado especificamente ao gerenciamento de safras de pequenas propriedades rurais, com foco especial nos aspectos relacionados aos custos de produção. A aplicação desenvolvida oferece uma interface simplificada e intuitiva para a visualização dos dados coletados, facilita o processo de registro de despesas operacionais, e beneficia não apenas os proprietários, mas também os gestores administrativos e os agrônomos eventualmente envolvidos na consultoria técnica dessas propriedades (LAGE, 2025).
+**2. Agrosmart** (https://www.agrosmart.com.br)  
+**Objetivo:** Plataforma de inteligência climática e agronômica voltada à agricultura de precisão, sustentabilidade e gestão de riscos ambientais.  
+**Características principais:** Monitoramento climático em tempo real com estações meteorológicas e sensores de campo; previsões agrometeorológicas específicas para cada propriedade; recomendações automáticas de manejo baseadas em modelos agronômicos; módulos de sustentabilidade e relatórios ESG (Environmental, Social and Governance); gestão de risco climático para seguradoras agrícolas; aplicativo BoosterAGRO para registro de atividades de campo.  
+**Modelo de precificação:** Assinatura anual com valores variando conforme área monitorada e serviços contratados.  
+**Diferenciais:** Foco em sustentabilidade e adaptação climática; atende mais de 100 mil produtores na América Latina; forte presença em culturas sensíveis ao clima como café, citros e mirtilo; parcerias com agroindústrias para monitoramento de fornecedores.
 
-O presente trabalho, desenvolvido por Rafael Silva Fortuna sob orientação do mesmo professor (Prof. Dr. Paulo Alexandre Bressan), parte da plataforma já implementada por Lage (2025) e propõe um foco complementar e igualmente essencial: a avaliação sistemática da usabilidade do sistema através de testes empíricos com usuários reais. Reconhece-se que o desenvolvimento técnico sólido e funcional realizado por Lage constitui a base necessária, mas não suficiente, para garantir que o sistema seja de fato utilizável e adotável pelo público-alvo. Assim, este trabalho contribui com a camada de validação centrada no usuário, identificando barreiras de usabilidade, implementando melhorias baseadas em evidências empíricas, e documentando cientificamente todo o processo de otimização da experiência do usuário.
+**3. Strider** (https://www.syngentadigital.com.br)  
+**Objetivo:** Suite digital da Syngenta focada em agricultura de precisão, oferecendo desde monitoramento por satélite até recomendações de manejo agronômico.  
+**Características principais:** Monitoramento de lavouras via imagens de satélite com detecção de variabilidade intra-talhão; mapas de índices de vegetação (NDVI); recomendações de aplicação em taxa variável; integração com máquinas agrícolas; diagnóstico fitossanitário assistido por inteligência artificial.  
+**Modelo de precificação:** Assinatura mensal com diferentes níveis de serviço.  
+**Diferenciais:** Integração com ecossistema Syngenta de produtos fitossanitários; tecnologia de ponta em sensoriamento remoto.
 
-### 4.2.2. Arquitetura de Sistemas com Node.js e Express
+**4. Granular (Climate FieldView)** (https://climate.com/fieldview)  
+**Objetivo:** Plataforma de agricultura digital da Bayer, voltada para agricultura de precisão em larga escala.  
+**Características principais:** Mapas de produtividade e prescrição; análise de desempenho de híbridos e variedades; integração com monitores de plantio e colheita; imagens de satélite; visualização de dados históricos de múltiplas safras.  
+**Modelo de precificação:** Planos gratuitos e pagos com funcionalidades crescentes.  
+**Diferenciais:** Maior plataforma de agricultura digital do mundo; tecnologia avançada de Big Data e IA.
+
+**5. Conta Azul Agro** (https://contaazul.com/agro)  
+**Objetivo:** ERP simplificado para pequenas e médias empresas rurais, com foco em gestão financeira e emissão de notas fiscais.  
+**Características principais:** Controle financeiro simplificado; emissão de NF-e, NFS-e e MDF-e; conciliação bancária automática; relatórios gerenciais básicos; app móvel para gestão em qualquer lugar.  
+**Modelo de precificação:** Assinatura mensal com teste gratuito de 7 dias.  
+**Diferenciais:** Interface extremamente simples e intuitiva; adaptação de software já consolidado no mercado de PMEs urbanas para o agronegócio.
+
+**6. Siagri Sistemas** (https://www.siagri.com.br)  
+**Objetivo:** Suite completa de ERPs modulares para diferentes segmentos do agronegócio (fazendas, cooperativas, cerealistas, revendas).  
+**Características principais:** Módulos especializados por atividade (produção agrícola, pecuária, cooperativas); gestão completa desde planejamento até comercialização; rastreabilidade de produção; integração com balanças e outros equipamentos de campo.  
+**Modelo de precificação:** Licenças perpétuas ou assinaturas anuais dependendo do módulo.  
+**Diferenciais:** 30 anos de mercado; mais de 3.500 clientes; soluções altamente customizáveis.
+
+**7. AgriManager** (https://www.agrimanager.com.br)  
+**Objetivo:** Sistema de gestão completo voltado para cooperativas e grupos agrícolas de médio e grande porte.  
+**Características principais:** Gestão de múltiplas fazendas; planejamento de safra com orçamento detalhado; acompanhamento de custos em tempo real; módulo de manutenção de máquinas; gestão de pessoal e ponto eletrônico; dashboards executivos para tomada de decisão.  
+**Modelo de precificação:** Sob consulta, customizado por cliente.  
+**Diferenciais:** Voltado para gestão profissional de múltiplas propriedades; forte presença em grandes grupos agrícolas.
+
+**8. FarmLogs / Bushel Farm** (https://farmlogs.com)  
+**Objetivo:** Plataforma norte-americana de gestão simplificada de fazendas com presença crescente no Brasil.  
+**Características principais:** Monitoramento de chuvas em tempo real; registro de atividades de campo; mapas de produtividade; análise de lucro por cultura; app móvel offline.  
+**Modelo de precificação:** Plano gratuito limitado e planos pagos mensais.  
+**Diferenciais:** Interface limpa e moderna; facilidade de uso reconhecida; versão gratuita funcional.
+
+**9. Agripoint** (https://www.agripoint.com.br)  
+**Objetivo:** Sistema de gestão técnica e agronômica para consultores e propriedades rurais.  
+**Características principais:** Cadastro detalhado de propriedades e talhões; planejamento de safra; acompanhamento técnico de aplicações; relatórios de visitas técnicas; gestão de recomendações agronômicas.  
+**Modelo de precificação:** Assinatura mensal ou anual.  
+**Diferenciais:** Foco em consultoria agronômica; ferramentas para profissionais do campo.
+
+**10. GeoAgri** (https://www.geoagri.com.br)  
+**Objetivo:** Plataforma web e mobile com foco em gestão administrativa, financeira e operacional de fazendas.  
+**Características principais:** Controle de custos por safra e talhão; gestão de estoque de insumos; planejamento financeiro; aplicativo mobile; dashboards personalizáveis.  
+**Modelo de precificação:** Assinatura mensal com diferentes planos por tamanho de propriedade.  
+**Diferenciais:** Interface web responsiva; foco em pequenos e médios produtores.
+
+### 4.2.2. Análise Comparativa de Funcionalidades
+
+A Tabela X apresenta uma comparação estruturada das principais funcionalidades oferecidas pelos softwares identificados, permitindo visualizar o posicionamento do Smart Plantio em relação às soluções consolidadas do mercado.
+
+**Tabela X — Comparação de funcionalidades dos principais softwares de gestão agrícola**
+
+<div align="center">
+
+| Software | Público-Alvo | Custo | Gestão Financeira | Emissão NF-e | App Móvel | Agricultura de Precisão | Gratuito/Trial |
+|:---------|:-------------|:------|:------------------|:-------------|:----------|:------------------------|:---------------|
+| **Aegro** | Médios/Grandes | R$$ Alto | ✅ Completa | ✅ Grátis | ✅ Offline | ❌ | ✅ NF-e grátis |
+| **Agrosmart** | Todos | R$$$ Alto | ⚠️ Básica | ❌ | ✅ Online | ✅ Avançada | ❌ |
+| **Strider** | Médios/Grandes | R$$$ Alto | ⚠️ Básica | ❌ | ✅ Online | ✅ Avançada | ⚠️ Trial |
+| **FieldView** | Grandes | R$$ Alto | ⚠️ Básica | ❌ | ✅ Online | ✅ Avançada | ✅ Plano grátis |
+| **Conta Azul Agro** | Pequenos/Médios | R$ Médio | ✅ Completa | ✅ Pago | ✅ Online | ❌ | ✅ 7 dias |
+| **Siagri** | Médios/Grandes | R$$$ Alto | ✅ Completa | ✅ Pago | ⚠️ Limitado | ⚠️ Opcional | ❌ |
+| **AgriManager** | Grandes/Cooperativas | R$$$$ Muito Alto | ✅ Avançada | ✅ Pago | ✅ Online | ⚠️ Opcional | ❌ |
+| **FarmLogs** | Pequenos/Médios | R$ Baixo | ⚠️ Básica | ❌ | ✅ Offline | ⚠️ Básica | ✅ Plano grátis |
+| **Agripoint** | Consultores | R$$ Médio | ❌ | ❌ | ✅ Online | ⚠️ Básica | ⚠️ Trial |
+| **GeoAgri** | Pequenos/Médios | R$ Médio | ✅ Completa | ⚠️ Opcional | ✅ Online | ❌ | ⚠️ Trial |
+| **Smart Plantio** | Pequenos | ✅ **Gratuito** | ✅ Completa | ❌ | ✅ Web Responsiva | ❌ | ✅ **100% Gratuito** |
+
+</div>
+
+**Legenda:**  
+✅ = Funcionalidade completa disponível | ⚠️ = Funcionalidade parcial ou limitada | ❌ = Funcionalidade não disponível  
+R$ = Até R$ 100/mês | R$$ = R$ 100-500/mês | R$$$ = R$ 500-2000/mês | R$$$$ = Acima de R$ 2000/mês
+
+Fonte: Elaborado pelo autor com base em informações dos sites oficiais dos softwares (2026).
+
+### 4.2.3. Lacunas Identificadas e Posicionamento do Smart Plantio
+
+A análise comparativa revela que o mercado brasileiro de softwares de gestão agrícola apresenta uma concentração significativa de soluções voltadas a médios e grandes produtores, com modelos de assinatura mensal ou anual que podem representar barreiras financeiras intransponíveis para o pequeno agricultor familiar. Segundo o IBGE (2019), mais de 77% dos estabelecimentos rurais brasileiros são classificados como agricultura familiar, porém esse segmento permanece historicamente subatendido por ferramentas digitais acessíveis.
+
+As principais lacunas identificadas incluem:
+
+1. **Barreira financeira:** Mesmo as soluções mais acessíveis apresentam custos recorrentes (assinaturas mensais/anuais) incompatíveis com a realidade orçamentária da agricultura familiar. Planos que custam R$ 100-300/mês podem representar 5-15% da margem de lucro mensal de pequenas propriedades.
+
+2. **Complexidade excessiva:** Sistemas como Siagri, AgriManager e FieldView oferecem funcionalidades avançadas (agricultura de precisão, integrações com maquinário, sensoriamento remoto) que, embora valiosas para grandes produtores, introduzem complexidade desnecessária e curva de aprendizado íngreme para o pequeno produtor cujas necessidades centrais são: controlar custos, registrar safras e visualizar rentabilidade.
+
+3. **Foco em nichos específicos:** Soluções como Agrosmart (foco em inteligência climática) e Strider (agricultura de precisão) atendem necessidades específicas mas não substituem um sistema de gestão completo e integrado.
+
+4. **Ausência de gratuidade real:** Embora alguns sistemas ofereçam versões gratuitas (FieldView, FarmLogs), essas versões são significativamente limitadas em funcionalidades críticas, servindo principalmente como estratégia de conversão para planos pagos.
+
+5. **Baixa aderência ao contexto brasileiro de pequenas propriedades:** Sistemas internacionais como FarmLogs e FieldView, apesar de tecnologicamente avançados, foram desenvolvidos para o contexto norte-americano de agricultura em larga escala e apresentam limitações de localização, idioma e adequação às particularidades do agronegócio familiar brasileiro.
+
+O **Smart Plantio** posiciona-se estrategicamente para preencher essas lacunas ao oferecer:
+
+- **Gratuidade completa:** Modelo 100% gratuito e open-source, eliminando completamente a barreira financeira de adoção.
+- **Foco em funcionalidades essenciais:** Concentração nas necessidades críticas do pequeno produtor (controle de custos, gestão de safras, estoque, visualização financeira) sem complexidade desnecessária.
+- **Interface simplificada em português:** Desenvolvimento centrado em usabilidade para usuários com diferentes níveis de letramento digital.
+- **Arquitetura web responsiva:** Funcionamento em qualquer dispositivo (desktop, tablet, smartphone) sem necessidade de instalação.
+- **Independência tecnológica:** Código-fonte aberto disponível no GitHub, permitindo customizações e garantindo sustentabilidade a longo prazo sem dependência de fornecedor.
+
+Essa proposta de valor diferenciada justifica a relevância do Smart Plantio como contribuição social e tecnológica para a democratização do acesso a ferramentas de gestão digital no contexto da agricultura familiar brasileira.
+
+## 4.3. O Sistema Smart Plantio
+
+Esta seção apresenta o sistema Smart Plantio em seus aspectos históricos, funcionais e arquiteturais, detalhando as tecnologias empregadas em sua construção.
+
+### 4.3.1. Histórico e Desenvolvimento Original
+
+Conforme apresentado na introdução, o sistema Smart Plantio foi desenvolvido como trabalho de conclusão de curso por Renan Magalhães Lage. O presente trabalho parte dessa base técnica já implementada para focar especificamente na avaliação e melhoria da usabilidade do sistema.
+
+### 4.3.2. Arquitetura de Sistemas com Node.js e Express
 
 O desenvolvimento de sistemas modernos para a web fundamenta-se no princípio arquitetural de separação de responsabilidades (Separation of Concerns), que preconiza a divisão do software em camadas ou módulos distintos, cada um com responsabilidades bem definidas e interfaces claras de comunicação. Essa abordagem favorece a escalabilidade do sistema (capacidade de crescer em funcionalidades e usuários sem perda significativa de desempenho), a manutenibilidade do código-fonte (facilidade de corrigir bugs e implementar novas funcionalidades), e a testabilidade (possibilidade de testar cada componente de forma isolada) (TILKOV; VINOSKI, 2010).
 
@@ -254,7 +372,7 @@ APIs RESTful, implementadas com Express no Smart Plantio, permitem que o fronten
 
 A combinação Node.js + Express garante que o Smart Plantio possua uma base técnica sólida e profissional para gerenciar funcionalidades críticas como autenticação de usuários (via OAuth 2.0 com Google), autorização baseada em papéis (proprietários, gestores, colaboradores com diferentes níveis de acesso), validação de dados de entrada, tratamento de erros, e gerenciamento seguro do fluxo de informações entre as diferentes entidades do sistema (propriedades, talhões, safras, custos, estoque) (LAGE, 2025).
 
-### 4.2.3. Desenvolvimento de Interfaces Reativas com React e Vite
+### 4.3.3. Desenvolvimento de Interfaces Reativas com React e Vite
 
 No ecossistema de desenvolvimento frontend moderno, a biblioteca React, criada e mantida pela Meta (anteriormente Facebook), destaca-se como uma das soluções mais populares e amplamente adotadas pela indústria de software para a construção de interfaces de usuário interativas e reativas. O React introduz uma abordagem declarativa e baseada em componentes para o desenvolvimento de UIs, em contraste com o modelo tradicional imperativo de manipulação direta do DOM (Document Object Model) através de JavaScript vanilla ou bibliotecas como jQuery (FEDERICO, 2015; BANKS; PORCELLO, 2020).
 
@@ -276,7 +394,7 @@ O Vite adota uma abordagem radicalmente diferente: durante o desenvolvimento, el
 
 Para o projeto deste trabalho de conclusão de curso, essa escolha tecnológica justifica-se não apenas pela produtividade no desenvolvimento e na implementação das correções identificadas nos testes de usabilidade, mas também pela garantia de uma aplicação final otimizada para carregamentos rápidos em produção. O Vite realiza otimizações avançadas no momento do build de produção, incluindo tree-shaking (remoção de código não utilizado), minificação agressiva, code-splitting automático (divisão do código em múltiplos arquivos menores carregados sob demanda), e pré-carregamento inteligente de recursos. Essas otimizações são cruciais para mitigar um dos problemas identificados nas rodadas iniciais de testes de usabilidade: tempos de carregamento percebidos como lentos pelos usuários, especialmente em conexões de internet rural com velocidades limitadas (LAGE, 2025; VITE, 2024).
 
-### 4.2.4. Persistência de Dados com MySQL e Sequelize
+### 4.3.4. Persistência de Dados com MySQL e Sequelize
 
 A camada de persistência de dados do Smart Plantio é estruturada sobre o sistema de gerenciamento de banco de dados relacional MySQL, um dos SGBDs (Sistemas Gerenciadores de Banco de Dados) relacionais de código aberto mais populares, maduros e amplamente utilizados em aplicações web de missão crítica ao redor do mundo (SILBERSCHATZ; KORTH; SUDARSHAN, 2012; MILANI, 2011).
 
@@ -290,13 +408,13 @@ Por exemplo, para criar uma nova safra no banco de dados, ao invés de escrever 
 
 Além de aumentar significativamente a produtividade do desenvolvimento e reduzir a propensão a erros, o Sequelize oferece mecanismos avançados e essenciais para a evolução contínua do schema do banco de dados através de migrations (migrações). Migrations são scripts versionados que descrevem modificações na estrutura do banco de dados (criar novas tabelas, adicionar colunas, modificar tipos de dados, criar índices, etc.). Essa abordagem garante que a estrutura das tabelas de safras, custos, estoque e demais entidades seja replicável em diferentes ambientes (desenvolvimento, testes, produção) e versionada ao longo da evolução do projeto, permitindo rastreabilidade completa das alterações na camada de dados e facilitando o trabalho colaborativo de equipes (MILANI, 2011; LAGE, 2025).
 
-## 4.3. Testes de Usabilidade e Interação Humano-Computador
+## 4.4. Testes de Usabilidade e Interação Humano-Computador
 
 A avaliação da qualidade de um sistema de software transcende amplamente a verificação de seu correto funcionamento técnico, da ausência de bugs, ou da completude de suas funcionalidades. Um sistema pode executar perfeitamente e de forma impecável todas as operações para as quais foi projetado e programado, passando em todos os testes automatizados e em todas as verificações de qualidade de código, e ainda assim apresentar sérias e até mesmo impeditivas dificuldades de uso para os seus utilizadores reais, tornando-o ineficaz, frustante e eventualmente rejeitado na prática (PREECE; ROGERS; SHARP, 2019).
 
 Essa constatação fundamenta a área acadêmica e profissional de Interação Humano-Computador (IHC), também conhecida internacionalmente como Human-Computer Interaction (HCI), que estuda, pesquisa e desenvolve princípios, métodos, técnicas e ferramentas para o projeto, implementação e avaliação de sistemas interativos destinados ao uso humano, com ênfase especial na qualidade da experiência de uso (PREECE; ROGERS; SHARP, 2019; CYBIS; BETIOL; FAUST, 2015).
 
-### 4.3.1. Definição de Usabilidade e Atributos de Avaliação
+### 4.4.1. Definição de Usabilidade e Atributos de Avaliação
 
 A usabilidade é formalmente definida pela norma internacional ISO/IEC 9241-11, que estabelece requisitos ergonômicos para o trabalho com dispositivos de visualização baseados em telas de vídeo, como *"o grau em que um produto ou sistema pode ser utilizado por utilizadores específicos para alcançar objetivos específicos com efetividade, eficiência e satisfação, num contexto de uso especificado"* (ISO/IEC, 2018, p. 3, tradução nossa).
 
@@ -320,7 +438,7 @@ Nielsen (1993), em sua obra seminal "Usability Engineering", amplia conceitualme
 
 5. **Satisfação subjetiva**: O sistema deve ser agradável de usar, de modo que os usuários fiquem subjetivamente satisfeitos ao usá-lo.
 
-### 4.3.2. Heurísticas de Nielsen para Avaliação de Interfaces
+### 4.4.2. Heurísticas de Nielsen para Avaliação de Interfaces
 
 Além dos testes com utilizadores reais, que serão detalhados posteriormente, a avaliação heurística constitui um método de inspeção complementar amplamente utilizado na prática de IHC. Nielsen (1994) propõe dez princípios heurísticos fundamentais que servem como guias práticos para o design de interfaces usáveis e como critérios de avaliação para identificar problemas de usabilidade através de inspeção por especialistas:
 
@@ -344,7 +462,7 @@ Além dos testes com utilizadores reais, que serão detalhados posteriormente, a
 
 **10. Ajuda e documentação**: Embora seja melhor que o sistema possa ser usado sem documentação, pode ser necessário fornecer ajuda e documentação. Qualquer informação dessa natureza deve ser fácil de pesquisar, focada na tarefa do utilizador, listar passos concretos a serem seguidos, e não ser muito extensa.
 
-### 4.3.3. Classificação de Severidade de Problemas
+### 4.4.3. Classificação de Severidade de Problemas
 
 Para priorizar adequadamente as intervenções técnicas após a identificação dos problemas de usabilidade nos testes, Nielsen (1994) propõe uma escala de severidade estruturada em cinco níveis, que combina três fatores: a frequência de ocorrência do problema (é comum ou raro?), o impacto no utilizador quando o problema ocorre (é fácil ou difícil de superar?), e a persistência do problema (é um problema pontual ou os usuários serão incomodados repetidamente por ele?):
 
@@ -360,7 +478,7 @@ Para priorizar adequadamente as intervenções técnicas após a identificação
 
 Esta classificação é adotada na análise qualitativa dos dados coletados nas rodadas de teste do presente estudo, permitindo priorizar correções de forma fundamentada.
 
-### 4.3.4. Protocolo Think-Aloud
+### 4.4.4. Protocolo Think-Aloud
 
 Para complementar as métricas numéricas objetivas (tempos, erros, taxas de sucesso) e compreender o raciocínio cognitivo subjacente aos erros cometidos pelos usuários, a pesquisa em IHC emprega frequentemente o protocolo Think-Aloud (Pensar em Voz Alta), formalizado por Ericsson e Simon (1993) em sua obra clássica "Protocol Analysis: Verbal Reports as Data".
 
@@ -370,7 +488,7 @@ O método Think-Aloud é particularmente valioso e revelador por permitir ao pes
 
 Por exemplo, um usuário pode verbalizar: "Preciso editar esse talhão... onde será que fica o botão de editar? Ah, tem esses três pontinhos aqui, deve ser um menu... [clica] sim, apareceu editar! [preenche o formulário] pronto, vou salvar... [clica em salvar] ué, não salvou? Voltou tudo pro que estava antes... será que bugou?" Essa verbalização revela que: (a) o ícone de três pontos não é suficientemente intuitivo para identificar a função de edição, (b) houve uma falha funcional no salvamento que frustrou completamente a expectativa do usuário, (c) o usuário não recebeu feedback claro sobre por que a operação falhou.
 
-### 4.3.5. Escalas de Medição e Satisfação
+### 4.4.5. Escalas de Medição e Satisfação
 
 Para capturar a satisfação do utilizador e a percepção subjetiva de facilidade de uso, a literatura de IHC emprega diversos instrumentos de medição validados:
 
@@ -380,7 +498,7 @@ Para capturar a satisfação do utilizador e a percepção subjetiva de facilida
 
 **NPS (Net Promoter Score)**: Desenvolvido por Frederick Reichheld em 2003, o NPS é uma métrica de lealdade e satisfação de clientes adaptável para contextos de avaliação de software. Os participantes são questionados sobre a probabilidade de recomendar o sistema a outro usuário/pessoa, numa escala de 0 a 10. Com base na resposta, os usuários são classificados como: Detratores (0-6), Neutros/Passivos (7-8), ou Promotores (9-10). O NPS é calculado como a diferença percentual entre promotores e detratores: NPS = % Promotores − % Detratores. Valores negativos indicam mais detratores do que promotores (situação crítica), valores entre 0 e 50 são considerados bons, e valores acima de 50 são excelentes (REICHHELD, 2003).
 
-### 4.3.6. Amostragem em Testes de Usabilidade
+### 4.4.6. Amostragem em Testes de Usabilidade
 
 Uma questão fundamental no planejamento de testes de usabilidade é: quantos participantes são necessários para identificar a maioria dos problemas de um sistema? Nielsen e Landauer (1993) responderam a essa pergunta através de um modelo matemático baseado em dados empíricos de múltiplos estudos de usabilidade.
 
@@ -392,7 +510,7 @@ Com base nesse modelo, Nielsen (2000) recomenda que a realização de testes com
 
 Essa recomendação é especialmente relevante para projetos acadêmicos e de pequeno porte, onde recursos de tempo, orçamento e acesso a participantes são limitados. Assim, o presente estudo adota uma amostra de 6 participantes, alinhada com as recomendações da literatura.
 
-### 4.3.7. Usabilidade versus Aplicabilidade
+### 4.4.7. Usabilidade versus Aplicabilidade
 
 É imperativo distinguir conceitualmente os dois tipos de avaliação que podem ser realizadas em sistemas interativos, pois embora relacionados, avaliam aspectos distintos da qualidade do software:
 
@@ -1381,9 +1499,15 @@ A transformação documentada de **NPS −83,3 para +33,3** em um intervalo de a
 
 # REFERÊNCIAS
 
+AEGRO. **Aegro: Software de Gestão Agrícola**. 2026. Disponível em: https://www.aegro.com.br. Acesso em: 12 dez. 2026.
+
+AGROSMART. **Agrosmart: Plataforma de Inteligência Climática para Agricultura**. 2026. Disponível em: https://www.agrosmart.com.br. Acesso em: 12 dez. 2026.
+
 BANKS, Alex; PORCELLO, Eve. **Learning React: Modern Patterns for Developing React Apps**. 2. ed. Sebastopol: O'Reilly Media, 2020.
 
 BROOKE, John. SUS: A 'quick and dirty' usability scale. In: JORDAN, P. W. et al. (Eds.). **Usability Evaluation in Industry**. London: Taylor & Francis, 1996. p. 189–194.
+
+CONTA AZUL. **Conta Azul Agro: ERP para o Campo**. 2026. Disponível em: https://contaazul.com/agro. Acesso em: 12 dez. 2026.
 
 CRESWELL, John W.; CRESWELL, J. David. **Research Design: Qualitative, Quantitative, and Mixed Methods Approaches**. 5. ed. Thousand Oaks: SAGE Publications, 2018.
 
@@ -1411,6 +1535,8 @@ MACAULAY, Linda. **Requirements Engineering**. London: Springer, 1996.
 
 MILANI, André. **MySQL: Guia do Programador**. São Paulo: Novatec, 2011.
 
+MELO, Darley Marques de; FERNANDES, Fabrícia Carvalho. A importância da gestão rural e da sustentabilidade em pequenas propriedades rurais. **Revista GETEC: Gestão, Tecnologia e Ciências**, v. 10, n. 28, p. 118-135, 2021. Disponível em: http://www.revistas.fucamp.edu.br/index.php/getec/article/view/2510. Acesso em: 12 dez. 2026.
+
 NIELSEN, Jakob. **Usability Engineering**. San Francisco: Morgan Kaufmann, 1993.
 
 NIELSEN, Jakob. Severity Ratings for Usability Problems. **Nielsen Norman Group**, 1994. Disponível em: https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/. Acesso em: 15 jun. 2026.
@@ -1419,15 +1545,27 @@ NIELSEN, Jakob. Why You Only Need to Test with 5 Users. **Nielsen Norman Group**
 
 NIELSEN, Jakob; LANDAUER, Thomas K. A mathematical model of the finding of usability problems. Proceedings of the **INTERACT '93 and CHI '93 Conference on Human Factors in Computing Systems**, Amsterdam, 1993. p. 206–213.
 
+OLIVEIRA, José Victor Dias. **Contabilidade e gestão de custos na agroindústria e produção de soja no Brasil: uma revisão da literatura**. 2023. Trabalho de Conclusão de Curso (Bacharelado em Ciências Contábeis) — Universidade Federal de Uberlândia, Uberlândia, 2023. Disponível em: https://repositorio.ufu.br/handle/123456789/36885. Acesso em: 12 dez. 2026.
+
 PREECE, Jennifer; ROGERS, Yvonne; SHARP, Helen. **Interaction Design: Beyond Human-Computer Interaction**. 5. ed. Hoboken: Wiley, 2019.
 
 PRODANOV, Cleber Cristiano; FREITAS, Ernani Cesar de. **Metodologia do trabalho científico: métodos e técnicas da pesquisa e do trabalho acadêmico**. 2. ed. Novo Hamburgo: Feevale, 2013.
 
-REICHHELD, Frederick F. The one number you need to grow. **Harvard Business Review**, v. 81, n. 12, p. 46–54, dez. 2003.
+SANTOS, Bruno Cássio. **A importância da gestão financeira para o pequeno produtor agrícola**. 2022. Trabalho de Conclusão de Curso (Bacharelado em Ciências Contábeis) — Centro Universitário Luterano de Palmas, Palmas, 2022. Disponível em: https://ulbra-to.br/bibliotecadigital/uploads/document6421dfc2c4c9e.pdf. Acesso em: 12 dez. 2026.
+
+SANTOS, Simone; COSTA, Thais; NUNES, Renata Veloso. Administração rural: a importância da gestão no desenvolvimento de propriedades rurais. **Ciências Gerenciais em Foco**, v. 10, n. 1, p. 43-58, 2021. Disponível em: https://revista.uemg.br/cgf/article/view/6431. Acesso em: 12 dez. 2026.
 
 SEBRAE. **O uso de tecnologia na gestão das micro e pequenas empresas rurais**. Brasília: Sebrae, 2020.
 
+SILVA, Andressa Larissa Santos; OLIVEIRA, Ana Carolina Silva. **A contabilidade rural como ferramenta de gestão para pequenos produtores rurais**. 2023. Trabalho de Conclusão de Curso (Bacharelado em Ciências Contábeis) — Faculdade Unicamps, Goiânia, 2023. Disponível em: https://facunicampsgoiania.com.br/wp-content/uploads/2023/09/TCC-A-CONTABILIDADE-RURAL-COMO-FERRAMENTA-DE-GESTAO-PARA-PEQUENOS-PRODUTORES-RURAIS.pdf. Acesso em: 12 dez. 2026.
+
+VITALI, Giovana; LIZOTE, Suzete Antonieta. Controles e práticas de gestão dos custos das propriedades rurais familiares. **Custos e Agronegócio Online**, v. 18, n. 2, p. 292-315, 2022. Disponível em: http://www.custoseagronegocioonline.com.br/numero2v18/OK%2015%20familiares.pdf. Acesso em: 12 dez. 2026.
+
+SIAGRI. **Siagri: Software de Gestão para o Agronegócio**. 2026. Disponível em: https://www.siagri.com.br. Acesso em: 12 dez. 2026.
+
 SILBERSCHATZ, Abraham; KORTH, Henry F.; SUDARSHAN, S. **Sistema de Banco de Dados**. 6. ed. Rio de Janeiro: Elsevier, 2012.
+
+SYNGENTA DIGITAL. **Syngenta Digital: Tecnologia para o Campo**. 2026. Disponível em: https://www.syngentadigital.com.br. Acesso em: 12 dez. 2026.
 
 TILKOV, Stefan; VINOSKI, Steve. Node.js: Using JavaScript to Build High-Performance Network Programs. **IEEE Internet Computing**, v. 14, n. 6, p. 80-83, 2010.
 
